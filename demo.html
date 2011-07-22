@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Gianluca Guarini- black and white image jQuery plug-in</title>
+<meta name="Description" content="With this jQuery plug in you can preload your page getting the percentage of bytes loaded just in HTML5" />
+<meta name="Keywords"  content="JavaScript,HTML5,CSS" />
+<style type="text/css">
+body {
+	margin: 20px;
+	padding: 0;
+	color:#999;
+	background:#000;
+}
+a img {
+	border:none;
+}
+#wrapper {
+	list-style:none;
+}
+#wrapper li {
+	float:left;
+}
+</style>
+<link href="css/BlackAndWhite.css" rel="stylesheet">
+<script src="js/jquery.min.js"></script>
+<script src="js/jQuery.BlackAndWhite.js"></script>
+<script>
+//init
+
+$(document).ready(function(){
+	$('.bwWrapper').BlackAndWhite();
+});
+</script>
+</head>
+<body>
+<h1>Cross browser Black and white jQuery  plug in</h1>
+<ul id="wrapper">
+	<li><a href="#" class="bwWrapper"><img  src="files/Hydrangeas.jpg" width="300" height="225" /></a></li>
+	<li><a href="#" class="bwWrapper"><img  src="files/Desert.jpg" width="300" height="225" /></a></li>
+	<li><a href="#" class="bwWrapper"><img  src="files/Chrysanthemum.jpg" width="300" height="225" /></a></li>
+	<li><a href="#" class="bwWrapper"><img  src="files/Jellyfish.jpg" width="300" height="225" /></a></li>
+	<li><a href="#" class="bwWrapper"><img  src="files/Koala.jpg" width="300" height="225" /></a></li>
+	<li><a href="#" class="bwWrapper"><img  src="files/Lighthouse.jpg" width="300" height="225" /></a></li>
+	<li><a href="#" class="bwWrapper"><img  src="files/Penguins.jpg" width="300" height="225" /></a></li>
+	<li><a href="#" class="bwWrapper"><img  src="files/Tulips.jpg" width="300" height="225" /></a></li>
+</ul>
+</body>
+</html>
