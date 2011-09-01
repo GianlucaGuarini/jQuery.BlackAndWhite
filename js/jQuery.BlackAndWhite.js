@@ -86,8 +86,8 @@
 						//getting the Pics proprieties
 						
 						
-						var currWidth  = $(pic).attr('width');
-						var currHeight = $(pic).attr('height');
+						var currWidth  = $(pic).prop('width');
+						var currHeight = $(pic).prop('height');
 						
 						if(!currWidth || !currWidth){
 							alert('Set the width and height on your images');
@@ -124,10 +124,10 @@
 				{
 					$(container).each(function(index,currImageWrapper){
 						var pic = $(currImageWrapper).find('img');
-						var picSrc = $(currImageWrapper).find('img').attr('src');
+						var picSrc = $(currImageWrapper).find('img').prop('src');
 						
-						var currWidth  = $(pic).attr('width');
-						var currHeight = $(pic).attr('height');
+						var currWidth  = $(pic).prop('width');
+						var currHeight = $(pic).prop('height');
 						if(!currWidth || !currWidth)
 						{
 							alert('Set the width and height on your images');
