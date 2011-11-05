@@ -53,7 +53,7 @@
                     imageData, px, length, i = 0,  
                     grey;  
       			
-					img.onload = function(){
+					$(img).load(function(){
 						ctx.drawImage(img, 0, 0);  
 						
 						imageData = ctx.getImageData(0, 0, width, height);  
@@ -67,7 +67,7 @@
 						}  
 			  
 						ctx.putImageData(imageData, 0, 0);  
-					}
+					});
 				
             }  
 			
