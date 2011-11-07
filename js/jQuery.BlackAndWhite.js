@@ -1,10 +1,10 @@
 /**
  *
- * Version: 	0.1.0
- * Author:		Gianluca Guarini
+ * Version: 	0.1.5
+ * Author:	Gianluca Guarini
  * Contact: 	gianluca.guarini@gmail.com
- * Website:		http://www.gianlucaguarini.com/
- * Twitter:		@gianlucaguarini
+ * Website:	http://www.gianlucaguarini.com/
+ * Twitter:	@gianlucaguarini
  *
  * Copyright (c) 2011 Gianluca Guarini
  *
@@ -43,9 +43,9 @@
             //@public vars
 			var hoverEffect =  options.hoverEffect;
 			
-            //@private var
+            //@private vars
 			var supportsCanvas = !!document.createElement('canvas').getContext;  
-   			//convert any image in B&W in a canvas
+   			//convert any image into B&W using HTML5 canvas
 			
 			function greyImages(img,canvas,width,height) {  
                 var ctx = canvas.getContext('2d'),  
@@ -82,12 +82,14 @@
 					$(container).each(function(index,currImageWrapper){
 						
 						var pic = $(currImageWrapper).find('img');
-						
+						var src = $(pic).prop('src');
 						//getting the Pics proprieties
 						
 						
 						var currWidth  = $(pic).prop('width');
 						var currHeight = $(pic).prop('height');
+						// fix opera bug decaching images
+						$(pic).prop('src',src+'?no-cache')
 						
 						if(!currWidth || !currWidth){
 							alert('Set the width and height on your images');
