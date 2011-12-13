@@ -1,10 +1,10 @@
 /**
  *
- * Version: 	0.1.5
- * Author:	Gianluca Guarini
+ * Version: 	0.1.6
+ * Author:		Gianluca Guarini
  * Contact: 	gianluca.guarini@gmail.com
- * Website:	http://www.gianlucaguarini.com/
- * Twitter:	@gianlucaguarini
+ * Website:		http://www.gianlucaguarini.com/
+ * Twitter:		@gianlucaguarini
  *
  * Copyright (c) 2011 Gianluca Guarini
  *
@@ -37,13 +37,13 @@
             var container = this;
             var defaults = 
 			{
-				hoverEffect : true
+				hoverEffect : false
             };
             var options = $.extend(defaults, options);
             //@public vars
 			var hoverEffect =  options.hoverEffect;
 			
-            //@private vars
+            //@private var
 			var supportsCanvas = !!document.createElement('canvas').getContext;  
    			//convert any image into B&W using HTML5 canvas
 			
@@ -54,6 +54,7 @@
                     grey;  
       			
 					$(img).load(function(){
+						
 						ctx.drawImage(img, 0, 0);  
 						
 						imageData = ctx.getImageData(0, 0, width, height);  
@@ -88,10 +89,13 @@
 						
 						var currWidth  = $(pic).prop('width');
 						var currHeight = $(pic).prop('height');
-						// fix opera bug decaching images
-						$(pic).prop('src',src+'?no-cache')
+						if (jQuery.browser.opera){
+							var rand = Math.random();
+							// fix opera bug decaching images
+							$(pic).prop('src',src+'?'+ rand)
+						}
 						
-						if(!currWidth || !currWidth){
+						if(!currWidth || !currHeight){
 							alert('Set the width and height on your images');
 							}
 						
@@ -130,7 +134,7 @@
 						
 						var currWidth  = $(pic).prop('width');
 						var currHeight = $(pic).prop('height');
-						if(!currWidth || !currWidth)
+						if(!currWidth || !currHeight)
 						{
 							alert('Set the width and height on your images');
 						}
