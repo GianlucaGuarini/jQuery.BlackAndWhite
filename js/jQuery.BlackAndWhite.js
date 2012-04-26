@@ -61,7 +61,7 @@
       			
 					$(img).load(function(){
 						
-						ctx.drawImage(img, 0, 0);  
+						ctx.drawImage(img, 0, 0, width, height);  
 						
 						var imageData = ctx.getImageData(0, 0, width, height),  
 							px = imageData.data, 
