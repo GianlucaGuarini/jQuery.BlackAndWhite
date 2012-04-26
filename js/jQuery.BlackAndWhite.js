@@ -1,10 +1,10 @@
 /**
  *
- * Version: 	0.1.7
- * Author:		Gianluca Guarini
+ * Version: 	0.1.8
+ * Author:	Gianluca Guarini
  * Contact: 	gianluca.guarini@gmail.com
- * Website:		http://www.gianlucaguarini.com/
- * Twitter:		@gianlucaguarini
+ * Website:	http://www.gianlucaguarini.com/
+ * Twitter:	@gianlucaguarini
  *
  * Copyright (c) 2011 Gianluca Guarini
  *
