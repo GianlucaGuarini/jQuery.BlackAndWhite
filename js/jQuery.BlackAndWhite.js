@@ -1,6 +1,6 @@
 /**
  *
- * Version: 	0.1.8
+ * Version: 	0.1.9
  * Author:	Gianluca Guarini
  * Contact: 	gianluca.guarini@gmail.com
  * Website:	http://www.gianlucaguarini.com/
@@ -50,7 +50,7 @@
 				/* Check if Web Workers are supported */
 			var	supportWebworker = function () {
     				return (typeof(Worker) !== "undefined") ? true:false;
-				};
+				}();
 
    			//convert any image into B&W using HTML5 canvas
 			function greyImages(img,canvas,width,height) {  
