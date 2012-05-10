@@ -69,22 +69,21 @@ $(window).load(function(){
 &lt;script src=&quot;js/jQuery.BlackAndWhite.js&quot;&gt;&lt;/script&gt;</code></pre>
 <p>2 <strong>add this class to the wrapper of the image that you want make in Black and White</strong></p>
 <pre><code class="html">&lt;div class="bwWrapper" &gt;
-	&lt;img src="path/to/your/image" / &gt;
+	&lt;img src="path/to/your/image" width="image width" height="image height" / &gt;
 &lt;/div&gt;</code></pre>
 <p>3 <strong>set the wrapper in this way from the css:</strong></p>
 <pre><code>.bwWrapper {
 	position:relative;
 	display:block;
 }</code></pre>
-<p>4 <strong>initialize the plug in on <span style="color:green">window load</span></strong> <span style="color:red">(no $(document).ready())</span>:</p>
+<p>4 <strong>initialize the plug in on <span style="color:green">window load</span>  <span style="color:red"> (no $(document).ready()) </span> </strong>:</p>
 <pre><code>$(window).load(function(){
 	$('.bwWrapper').BlackAndWhite({
-		hoverEffect : true, 
-		/* here you should pass the path to the Webworker script for a superfast implementation 
-		(set it to false if you don't want use any webworker) */
-		webworkerPath : 'js/', 
-		/* responsive images (no fixed width and height)*/
-		responsive : true 
+		hoverEffect : true, // default true
+		// set the path to BnWWorker.js for a superfast implementation
+		webworkerPath : false,
+		// for the images with a fluid width and height 
+		responsive:true
 	});
 });</code></pre>
 <h3>Demo</h3>
@@ -99,6 +98,7 @@ $(window).load(function(){
 	<li><a href="#" class="bwWrapper"><img  src="files/Penguins.jpg" width="300" height="225" /></a></li>
 	<li class="last"><a href="#" class="bwWrapper"><img  src="files/Tulips.jpg" width="300" height="225" /></a></li>
 </ul>
+<p><a href="responsive.html">Responsive Demo</a></p>
 <p><a href="https://github.com/GianlucaGuarini/jQuery.BlackAndWhite">Download on Github</a></p>
 
 

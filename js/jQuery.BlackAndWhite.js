@@ -161,7 +161,7 @@ $.fn.extend({
         }
 
         this.resizeImages = function () {
-            console.log($(container).length)
+            
             $(container).each(function (index, currImageWrapper) {
                 var pic = $(currImageWrapper).find('img:not(.ieFix)');
                 if (isIE7) {
