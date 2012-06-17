@@ -6,7 +6,7 @@
  * Website: http://www.gianlucaguarini.com/
  * Twitter: @gianlucaguarini
  *
- * Copyright (c) 2011 Gianluca Guarini
+ * Copyright (c) 2012 Gianluca Guarini
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -114,14 +114,14 @@
                             'position': 'absolute',
                             top: 0,
                             left: 0,
-                            display: invertHoverEffect ? 'block' : 'none'
+                            display: invertHoverEffect ? 'none' : 'block'
                         });
 
                         greyImages(pic[0], currCanvas[0], currWidth, currHeight);
 
                         if (hoverEffect) {
                             $(this).mouseenter(function () {
-                                if(invertHoverEffect) {
+                                if(!invertHoverEffect) {
                                     $(this).find('canvas').stop(true, true).fadeOut();
                                 } else {
                                     $(this).find('canvas').stop(true, true).fadeIn();
@@ -129,10 +129,10 @@
                                 
                             });
                             $(this).mouseleave(function () {
-                                if(invertHoverEffect) {
+                                if(!invertHoverEffect) {
                                     $(this).find('canvas').stop(true, true).fadeIn();
                                 } else {
-                                    $(this).find('canvas').stop(true, true).fadeOut();  
+                                    $(this).find('canvas').stop(true, true).fadeOut();
                                 }
                             });
                         }
@@ -154,21 +154,21 @@
                             top: 0,
                             left: 0,
                             'filter': 'progid:DXImageTransform.Microsoft.BasicImage(grayscale=1)',
-                            display: invertHoverEffect ? 'block' : 'none'
+                            display: invertHoverEffect ? 'none' : 'block'
                         });
 
                     });
 
                     if (hoverEffect) {
                         $(container).mouseenter(function () {
-                            if(invertHoverEffect) {
+                            if(!invertHoverEffect) {
                                 $(this).children('.ieFix').stop(true, true).fadeOut();
                             } else {
                                 $(this).children('.ieFix').stop(true, true).fadeIn();
                             }
                         });
                         $(container).mouseleave(function () {
-                            if(invertHoverEffect) {
+                            if(!invertHoverEffect) {
                                 $(this).children('.ieFix').stop(true, true).fadeIn();
                             } else {
                                 $(this).children('.ieFix').stop(true, true).fadeOut();
