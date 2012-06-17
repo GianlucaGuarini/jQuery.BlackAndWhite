@@ -1,6 +1,6 @@
 /**
  *
- * Version: 0.2.0
+ * Version: 0.2.1
  * Author:  Gianluca Guarini
  * Contact: gianluca.guarini@gmail.com
  * Website: http://www.gianlucaguarini.com/
@@ -38,12 +38,14 @@
                 defaults = {
                     hoverEffect: true,
                     webworkerPath: false,
-                    responsive: true
+                    responsive: true,
+                    invertHoverEffect: false
                 };
                 options = $.extend(defaults, options);
             //@public vars
             var hoverEffect = options.hoverEffect,
                 webworkerPath = options.webworkerPath,
+                invertHoverEffect = options.invertHoverEffect,
                 responsive = options.responsive;
 
             //@private var
@@ -111,17 +113,27 @@
                         $(currCanvas).css({
                             'position': 'absolute',
                             top: 0,
-                            left: 0
+                            left: 0,
+                            display: invertHoverEffect ? 'block' : 'none'
                         });
 
                         greyImages(pic[0], currCanvas[0], currWidth, currHeight);
 
                         if (hoverEffect) {
                             $(this).mouseenter(function () {
-                                $(this).find('canvas').stop(true, true).fadeOut();
+                                if(invertHoverEffect) {
+                                    $(this).find('canvas').stop(true, true).fadeOut();
+                                } else {
+                                    $(this).find('canvas').stop(true, true).fadeIn();
+                                }
+                                
                             });
                             $(this).mouseleave(function () {
-                                $(this).find('canvas').stop(true, true).fadeIn();
+                                if(invertHoverEffect) {
+                                    $(this).find('canvas').stop(true, true).fadeIn();
+                                } else {
+                                    $(this).find('canvas').stop(true, true).fadeOut();  
+                                }
                             });
                         }
 
@@ -141,17 +153,26 @@
                             'position': 'absolute',
                             top: 0,
                             left: 0,
-                            'filter': 'progid:DXImageTransform.Microsoft.BasicImage(grayscale=1)'
+                            'filter': 'progid:DXImageTransform.Microsoft.BasicImage(grayscale=1)',
+                            display: invertHoverEffect ? 'block' : 'none'
                         });
 
                     });
 
                     if (hoverEffect) {
                         $(container).mouseenter(function () {
-                            $(this).children('.ieFix').stop(true, true).fadeOut();
+                            if(invertHoverEffect) {
+                                $(this).children('.ieFix').stop(true, true).fadeOut();
+                            } else {
+                                $(this).children('.ieFix').stop(true, true).fadeIn();
+                            }
                         });
                         $(container).mouseleave(function () {
-                            $(this).children('.ieFix').stop(true, true).fadeIn();
+                            if(invertHoverEffect) {
+                                $(this).children('.ieFix').stop(true, true).fadeIn();
+                            } else {
+                                $(this).children('.ieFix').stop(true, true).fadeOut();
+                            }
                         });
                     }
 

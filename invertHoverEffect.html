@@ -49,53 +49,53 @@ li.last {
 </head>
 <body>
 	<h1>Crossbrowser Html5 Black and white jQuery plug in</h1>
-	<h2>Responsive demo</h2>
+	<h2>Hover effect Inverted</h2>
 
 	<h3>Demo</h3>
 	<ul id="wrapper">
 		<li>
 			<a target="_blank" href="http://twitter.com/gianlucaguarini" class="bwWrapper">
-				<img  src="files/twitter.jpg" width="100%" />
+				<img  src="files/twitter.jpg" width="300" height="225" />
 			</a>
 		</li>
 		<li>
 			<a href="#" class="bwWrapper">
-				<img  src="files/Hydrangeas.jpg" width="40%" />
+				<img  src="files/Hydrangeas.jpg" width="300" height="225" />
 			</a>
 		</li>
 		<li class="last">
 			<a href="#" class="bwWrapper">
-				<img  src="files/Desert.jpg" width="50%" />
+				<img  src="files/Desert.jpg" width="300" height="225" />
 			</a>
 		</li>
 		<li>
 			<a href="#" class="bwWrapper">
-				<img  src="files/Chrysanthemum.jpg" width="100%" />
+				<img  src="files/Chrysanthemum.jpg" width="300" height="225" />
 			</a>
 		</li>
 		<li>
 			<a href="#" class="bwWrapper">
-				<img  src="files/Jellyfish.jpg" width="60%" />
+				<img  src="files/Jellyfish.jpg" width="300" height="225" />
 			</a>
 		</li>
 		<li class="last">
 			<a href="#" class="bwWrapper">
-				<img  src="files/Koala.jpg" width="100%" />
+				<img  src="files/Koala.jpg" width="300" height="225" />
 			</a>
 		</li>
 		<li>
 			<a href="#" class="bwWrapper">
-				<img  src="files/Lighthouse.jpg" width="30%" />
+				<img  src="files/Lighthouse.jpg" width="300" height="225" />
 			</a>
 		</li>
 		<li>
 			<a href="#" class="bwWrapper">
-				<img  src="files/Penguins.jpg" width="90%" />
+				<img  src="files/Penguins.jpg" width="300" height="225" />
 			</a>
 		</li>
 		<li class="last">
 			<a href="#" class="bwWrapper">
-				<img  src="files/Tulips.jpg" width="100%" />
+				<img  src="files/Tulips.jpg" width="300" height="225" />
 			</a>
 		</li>
 	</ul>
@@ -106,14 +106,15 @@ li.last {
 		<a href="http://www.gianlucaguarini.com" target="_blank">Gianluca Guarini 2012</a>
 	</small>
 	<script>
-//init
-$(window).load(function(){
-	$('.bwWrapper').BlackAndWhite({
-		hoverEffect:true,
-		webworkerPath: 'js/'
-	});
+     //init
+     $(window).load(function() {
+         $('.bwWrapper').BlackAndWhite({
+             hoverEffect: true,
+             webworkerPath: 'js/',
+             invertHovereffect: true
+         });
 
-});
+         });
 </script>
 </body>
 </html>
