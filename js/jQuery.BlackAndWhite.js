@@ -1,6 +1,6 @@
 /**
  *
- * Version: 0.2.1
+ * Version: 0.2.2
  * Author:  Gianluca Guarini
  * Contact: gianluca.guarini@gmail.com
  * Website: http://www.gianlucaguarini.com/
@@ -47,7 +47,6 @@
                 webworkerPath = options.webworkerPath,
                 invertHoverEffect = options.invertHoverEffect,
                 responsive = options.responsive;
-
             //@private var
             var supportsCanvas = !!document.createElement('canvas').getContext,
                 $window = $(window);
@@ -57,9 +56,9 @@
                 }());
 
             var isIE7 = $.browser.msie && +$.browser.version === 7;
-
+            //@private methods
             //convert any image into B&W using HTML5 canvas
-            function greyImages(img, canvas, width, height) {
+            var greyImages = function (img, canvas, width, height) {
                 var ctx = canvas.getContext('2d'),
                     currImg = img,
                     i = 0,
@@ -91,83 +90,75 @@
 
                     ctx.putImageData(imageData, 0, 0);
                 }
-            }
+            };
 
-            this.init = function (options) {
+            var injectTags = function (pic, currImageWrapper) {
+        
+                var src = pic.src;
+
                 if (supportsCanvas && (!($.browser.msie && $.browser.version == '9.0'))) {
 
-                    $(container).each(function (index, currImageWrapper) {
+                    var currWidth = $(currImageWrapper).find('img').width(),
+                        currHeight = $(currImageWrapper).find('img').height(),
+                        realWidth = pic.width,
+                        realHeight = pic.height;
 
-                        var pic = $(currImageWrapper).find('img');
-                        var src = $(pic).prop('src');
-                        //getting the Pics proprieties
-
-                        var currWidth = $(pic).width();
-                        var currHeight = $(pic).height();
-
-                        //adding the canvas
-                        $('<canvas width="' + currWidth + '" height="' + currHeight + '"></canvas>').prependTo(currImageWrapper);
-                        //getting the canvas
-                        var currCanvas = $(currImageWrapper).find('canvas');
-                        //setting the canvas position on the Pics
-                        $(currCanvas).css({
-                            'position': 'absolute',
-                            top: 0,
-                            left: 0,
-                            display: invertHoverEffect ? 'none' : 'block'
-                        });
-
-                        greyImages(pic[0], currCanvas[0], currWidth, currHeight);
-
-                        if (hoverEffect) {
-                            $(this).mouseenter(function () {
-                                if(!invertHoverEffect) {
-                                    $(this).find('canvas').stop(true, true).fadeOut();
-                                } else {
-                                    $(this).find('canvas').stop(true, true).fadeIn();
-                                }
-                                
-                            });
-                            $(this).mouseleave(function () {
-                                if(!invertHoverEffect) {
-                                    $(this).find('canvas').stop(true, true).fadeIn();
-                                } else {
-                                    $(this).find('canvas').stop(true, true).fadeOut();
-                                }
-                            });
-                        }
-
+                    //adding the canvas
+                    $('<canvas width="' + realWidth + '" height="' + realHeight + '"></canvas>').prependTo(currImageWrapper);
+                    //getting the canvas
+                    var currCanvas = $(currImageWrapper).find('canvas');
+                    //setting the canvas position on the Pics
+                    $(currCanvas).css({
+                        'position': 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: currWidth,
+                        height: currHeight,
+                        display: invertHoverEffect ? 'none' : 'block'
                     });
 
-                } else {
-                    $(container).each(function (index, currImageWrapper) {
-                        var pic = $(currImageWrapper).find('img');
-                        var picSrc = $(currImageWrapper).find('img').prop('src');
+                    greyImages(pic, currCanvas[0], realWidth, realHeight);
 
-                        var currWidth = $(pic).prop('width');
-                        var currHeight = $(pic).prop('height');
-
-                        //adding the canvas
-                        $('<img src=' + picSrc + ' width="' + currWidth + '" height="' + currHeight + '" class="ieFix" /> ').prependTo(currImageWrapper);
-                        $('.ieFix').css({
-                            'position': 'absolute',
-                            top: 0,
-                            left: 0,
-                            'filter': 'progid:DXImageTransform.Microsoft.BasicImage(grayscale=1)',
-                            display: invertHoverEffect ? 'none' : 'block'
+                    if (hoverEffect) {
+                        $(currImageWrapper).mouseenter(function () {
+                            if(!invertHoverEffect) {
+                                $(this).find('canvas').stop(true, true).fadeOut();
+                            } else {
+                                $(this).find('canvas').stop(true, true).fadeIn();
+                            }
                         });
+                        $(currImageWrapper).mouseleave(function () {
+                            if(!invertHoverEffect) {
+                                $(this).find('canvas').stop(true, true).fadeIn();
+                            } else {
+                                $(this).find('canvas').stop(true, true).fadeOut();
+                            }
+                        });
+                    }
+                } else {
 
+                    var ieWidth = $(currImageWrapper).find('img').prop('width');
+                    var ieHeight = $(currImageWrapper).find('img').prop('height');
+
+                    //adding the canvas
+                    $('<img src=' + src + ' width="' + ieWidth + '" height="' + ieHeight + '" class="ieFix" /> ').prependTo(currImageWrapper);
+                    $('.ieFix').css({
+                        'position': 'absolute',
+                        top: 0,
+                        left: 0,
+                        'filter': 'progid:DXImageTransform.Microsoft.BasicImage(grayscale=1)',
+                        display: invertHoverEffect ? 'none' : 'block'
                     });
 
                     if (hoverEffect) {
-                        $(container).mouseenter(function () {
+                        $(currImageWrapper).mouseenter(function () {
                             if(!invertHoverEffect) {
                                 $(this).children('.ieFix').stop(true, true).fadeOut();
                             } else {
                                 $(this).children('.ieFix').stop(true, true).fadeIn();
                             }
                         });
-                        $(container).mouseleave(function () {
+                        $(currImageWrapper).mouseleave(function () {
                             if(!invertHoverEffect) {
                                 $(this).children('.ieFix').stop(true, true).fadeIn();
                             } else {
@@ -175,8 +166,22 @@
                             }
                         });
                     }
-
                 }
+            };
+            this.init = function (options) {
+
+                $(container).each(function (index, currImageWrapper) {
+                    var pic = new Image();
+                    pic.src = $(currImageWrapper).find('img').prop("src");
+
+                    if (!pic.width) {
+                        $(pic).on("load", function() {injectTags( pic, currImageWrapper);});
+                    } else {
+                        injectTags( pic, currImageWrapper );
+                    }
+                });
+
+                
                 if (responsive) {
                     $window.on('resize orientationchange', container.resizeImages);
                 }
