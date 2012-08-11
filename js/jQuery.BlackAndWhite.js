@@ -39,14 +39,17 @@
                     hoverEffect: true,
                     webworkerPath: false,
                     responsive: true,
-                    invertHoverEffect: false
+                    invertHoverEffect: false,
+                    speed: 500
                 };
                 options = $.extend(defaults, options);
             //@public vars
             var hoverEffect = options.hoverEffect,
                 webworkerPath = options.webworkerPath,
                 invertHoverEffect = options.invertHoverEffect,
-                responsive = options.responsive;
+                responsive = options.responsive,
+                fadeSpeedIn = $.isPlainObject(options.speed) ? options.speed.fadeIn : options.speed,
+                fadeSpeedOut = $.isPlainObject(options.speed) ? options.speed.fadeOut : options.speed;
             //@private var
             var supportsCanvas = !!document.createElement('canvas').getContext,
                 $window = $(window);
@@ -122,16 +125,16 @@
                     if (hoverEffect) {
                         $(currImageWrapper).mouseenter(function () {
                             if(!invertHoverEffect) {
-                                $(this).find('canvas').stop(true, true).fadeOut();
+                                $(this).find('canvas').stop(true, true).fadeOut(fadeSpeedOut);
                             } else {
-                                $(this).find('canvas').stop(true, true).fadeIn();
+                                $(this).find('canvas').stop(true, true).fadeIn(fadeSpeedIn);
                             }
                         });
                         $(currImageWrapper).mouseleave(function () {
                             if(!invertHoverEffect) {
-                                $(this).find('canvas').stop(true, true).fadeIn();
+                                $(this).find('canvas').stop(true, true).fadeIn(fadeSpeedIn);
                             } else {
-                                $(this).find('canvas').stop(true, true).fadeOut();
+                                $(this).find('canvas').stop(true, true).fadeOut(fadeSpeedOut);
                             }
                         });
                     }
@@ -153,16 +156,16 @@
                     if (hoverEffect) {
                         $(currImageWrapper).mouseenter(function () {
                             if(!invertHoverEffect) {
-                                $(this).children('.ieFix').stop(true, true).fadeOut();
+                                $(this).children('.ieFix').stop(true, true).fadeOut(fadeSpeedOut);
                             } else {
-                                $(this).children('.ieFix').stop(true, true).fadeIn();
+                                $(this).children('.ieFix').stop(true, true).fadeIn(fadeSpeedIn);
                             }
                         });
                         $(currImageWrapper).mouseleave(function () {
                             if(!invertHoverEffect) {
-                                $(this).children('.ieFix').stop(true, true).fadeIn();
+                                $(this).children('.ieFix').stop(true, true).fadeIn(fadeSpeedIn);
                             } else {
-                                $(this).children('.ieFix').stop(true, true).fadeOut();
+                                $(this).children('.ieFix').stop(true, true).fadeOut(fadeSpeedOut);
                             }
                         });
                     }
