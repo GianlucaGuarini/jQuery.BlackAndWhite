@@ -4,30 +4,32 @@ Read the wiki for the usage ( https://github.com/GianlucaGuarini/jQuery.BlackAnd
 Plugin Showcase
 =================
 
-Teocomi.com
------
-<a href="http://teocomi.com/photos/">
-![Teocomi.com](http://www.gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/showcase/teocomi.png)
-</a>
-
-Deejay.it
------
-<a href="http://www.deejay.it/dj/extra/widget">
-![Deejay.it](http://www.gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/showcase/deejay.png)
-</a>
-
-Fibreking.com
------
-<a href="http://www.fibreking.com/">
-![Fibreking.com](http://www.gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/showcase/fibreking.png)
-</a>
-
+<ul>
+	<li>
+		Teocomi.com<br />
+		<a href="http://teocomi.com/photos/">
+		![Teocomi.com](http://www.gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/showcase/teocomi.png)
+		</a>
+	</li>
+	<li>
+		Deejay.it<br />
+		<a href="http://www.deejay.it/dj/extra/widget">
+		![Deejay.it](http://www.gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/showcase/deejay.png)
+		</a>
+	</li>
+	<li>
+		Fibreking.com<br />
+		<a href="http://www.fibreking.com/">
+		![Fibreking.com](http://www.gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/showcase/fibreking.png)
+		</a>
+	</li>
+</ul>
 If you want add a new entry please fork this README file
 
 IMPORTANT
------
+=================
 the script works only for the images hosted on the same server in which the page is loaded!
 
 THANKS
------
+=================
 Thanks to Jeffrey Way for the inspiration ( http://jeffrey-way.com/ )
