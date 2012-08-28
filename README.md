@@ -1,8 +1,9 @@
 This plug-in can easily convert every colored image (in an html page) into a B&W greyscale image.
 Read the wiki for the usage ( https://github.com/GianlucaGuarini/jQuery.BlackAndWhite/wiki/Simple-and-Fast-usage ).
 
+---------
 Plugin Showcase
-=================
+---------
 
 
 
@@ -19,8 +20,10 @@ Plugin Showcase
 ![Fibreking.com](http://www.gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/showcase/fibreking.png)
 </a>
 
-If you want add a new entry please fork this README file
 ---------
+
+If you want add a new entry please fork this README file
+=================
 
 IMPORTANT
 =================
