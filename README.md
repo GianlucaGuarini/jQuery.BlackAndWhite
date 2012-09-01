@@ -5,24 +5,14 @@ Read the plugin API on here http://www.gianlucaguarini.com/canvas-experiments/jQ
 Plugin Showcase
 ---------
 
-
-
-<a href="http://teocomi.com/photos/">
-![Teocomi.com](http://www.gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/showcase/teocomi.png)
-</a>
-
-
-<a href="http://www.deejay.it/dj/extra/widget">
-![Deejay.it](http://www.gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/showcase/deejay.png)
-</a>
-
-<a href="http://www.fibreking.com/">
-![Fibreking.com](http://www.gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/showcase/fibreking.png)
-</a>
+<ul>
+	<li><a href="http://teocomi.com/photos/">Teocomi.com</a></li>
+	<li><a href="http://www.deejay.it/dj/extra/widget">Deejay.it</a></li>
+</ul>
 
 ---------
 
-If you want add a new entry please fork this README file
+If your want add a new entry please fork this README file
 =================
 
 IMPORTANT
