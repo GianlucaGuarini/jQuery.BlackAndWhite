@@ -8,6 +8,7 @@ Plugin Showcase
 <ul>
 	<li><a href="http://teocomi.com/photos/">Teocomi.com</a></li>
 	<li><a href="http://www.deejay.it/dj/extra/widget">Deejay.it</a></li>
+	<li><a href="http://www.unitedesigners.it/#!/124-tailored-branding">United Designers</a></li>
 </ul>
 
 ---------
