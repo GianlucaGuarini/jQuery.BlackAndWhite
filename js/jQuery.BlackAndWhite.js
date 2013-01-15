@@ -1,6 +1,6 @@
 /**
  *
- * Version: 0.2.3
+ * Version: 0.2.4
  * Author:  Gianluca Guarini
  * Contact: gianluca.guarini@gmail.com
  * Website: http://www.gianlucaguarini.com/
@@ -58,7 +58,7 @@
                     return (typeof (Worker) !== "undefined") ? true : false;
                 }());
 
-            var isIE7 = $.browser.msie && +$.browser.version === 7;
+            var isIE7 = (document.all && !window.opera && window.XMLHttpRequest) ? true : false;;
             //@private methods
             //convert any image into B&W using HTML5 canvas
             var greyImages = function (img, canvas, width, height) {
@@ -99,7 +99,7 @@
         
                 var src = pic.src;
 
-                if (supportsCanvas && (!($.browser.msie && $.browser.version == '9.0'))) {
+                if (supportsCanvas) {
 
                     var currWidth = $(currImageWrapper).find('img').width(),
                         currHeight = $(currImageWrapper).find('img').height(),
