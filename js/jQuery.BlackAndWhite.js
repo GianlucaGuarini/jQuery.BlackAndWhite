@@ -1,12 +1,12 @@
 /**
  *
- * Version: 0.2.4
+ * Version: 0.2.5
  * Author:  Gianluca Guarini
  * Contact: gianluca.guarini@gmail.com
  * Website: http://www.gianlucaguarini.com/
  * Twitter: @gianlucaguarini
  *
- * Copyright (c) 2012 Gianluca Guarini
+ * Copyright (c) 2013 Gianluca Guarini
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -29,191 +29,230 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  **/
-(function ($) {
-    $.fn.extend({
-        BlackAndWhite: function (options) {
-            'use strict';
-            var container = this,
-                self = this,
-                defaults = {
-                    hoverEffect: true,
-                    webworkerPath: false,
-                    responsive: true,
-                    invertHoverEffect: false,
-                    speed: 500
-                };
-                options = $.extend(defaults, options);
-            //@public vars
-            var hoverEffect = options.hoverEffect,
-                webworkerPath = options.webworkerPath,
-                invertHoverEffect = options.invertHoverEffect,
-                responsive = options.responsive,
-                fadeSpeedIn = $.isPlainObject(options.speed) ? options.speed.fadeIn : options.speed,
-                fadeSpeedOut = $.isPlainObject(options.speed) ? options.speed.fadeOut : options.speed;
-            //@private var
-            var supportsCanvas = !!document.createElement('canvas').getContext,
-                $window = $(window);
-            /* Check if Web Workers are supported */
-            var supportWebworker = (function () {
-                    return (typeof (Worker) !== "undefined") ? true : false;
-                }());
+;(function ($) {
+	$.fn.extend({
+		BlackAndWhite: function (options) {
+			'use strict';
+			var $container = this,
+				defaults = {
+					hoverEffect: true,
+					webworkerPath: false,
+					responsive: true,
+					invertHoverEffect: false,
+					speed: 500
+				};
+				options = $.extend(defaults, options);
 
-            var isIE7 = (document.all && !window.opera && window.XMLHttpRequest) ? true : false;;
-            //@private methods
-            //convert any image into B&W using HTML5 canvas
-            var greyImages = function (img, canvas, width, height) {
-                var ctx = canvas.getContext('2d'),
-                    currImg = img,
-                    i = 0,
-                    grey;
+			/**
+			 * 
+			 * Public vars
+			 * 
+			 */
+			var hoverEffect = options.hoverEffect,
+				webworkerPath = options.webworkerPath,
+				invertHoverEffect = options.invertHoverEffect,
+				responsive = options.responsive,
+				fadeSpeedIn = $.isPlainObject(options.speed) ? options.speed.fadeIn : options.speed,
+				fadeSpeedOut = $.isPlainObject(options.speed) ? options.speed.fadeOut : options.speed;
 
-                ctx.drawImage(img, 0, 0, width, height);
+			var isIE7 = (document.all && !window.opera && window.XMLHttpRequest) ? true : false;
 
-                var imageData = ctx.getImageData(0, 0, width, height),
-                    px = imageData.data,
-                    length = px.length;
+			/*
+			*
+			* features detection
+			*
+			*/
 
-                // web worker superfast implementation
-                if (supportWebworker && webworkerPath) {
+			var browserPrefixes = ' -webkit- -moz- -o- -ms- '.split(' ');
 
-                    var BnWWorker = new Worker(webworkerPath + "BnWWorker.js");
+			var cssPrefixString = {};
+			var cssPrefix = function(property) {
+				if (cssPrefixString[property] || cssPrefixString[property] === '') return cssPrefixString[property] + property;
+				var e = document.createElement('div');
+				var prefixes = ['', 'Moz', 'Webkit', 'O', 'ms', 'Khtml']; // Various supports...
+				for (var i in prefixes) {
+					if (typeof e.style[prefixes[i] + property] !== 'undefined') {
+						cssPrefixString[property] = prefixes[i];
+						return prefixes[i] + property;
+					}
+				}
+				return property.toLowerCase();
+			};
 
-                    BnWWorker.postMessage(imageData);
+			// https://github.com/Modernizr/Modernizr/blob/master/feature-detects/css-filters.js
+			var cssfilters = function () {
+				var el = document.createElement('div');
+				el.style.cssText = browserPrefixes.join('filter' + ':blur(2px); ');
+				return !!el.style.length && ((document.documentMode === undefined || document.documentMode > 9));
+			}();
+			/**
+			 *
+			 * Private vars
+			 * 
+			 */
+			var supportsCanvas = !!document.createElement('canvas').getContext,
+				$window = $(window),
+			/* Check if Web Workers are supported */
+				supportWebworker = (function () {
+					return (typeof (Worker) !== "undefined") ? true : false;
+				}()),
+				cssFilter = cssPrefix('Filter'),
+				imagesArray = [],
+				BnWWorker = supportWebworker && webworkerPath ? new Worker(webworkerPath + "BnWWorker.js") : false;
 
-                    BnWWorker.onmessage = function (event) {
-                        ctx.putImageData(event.data, 0, 0);
-                    };
-                } else {
+			/**
+			*
+			* Private methods
+			* 
+			*/
+			var _onMouseLeave = function (e) {
+				$(e.currentTarget).find('.BWfade').stop(true, true)[!invertHoverEffect ? 'fadeIn' : 'fadeOut'](fadeSpeedIn);
+			};
+			var _onMouseEnter= function (e) {
+				$(e.currentTarget).find('.BWfade').stop(true, true)[invertHoverEffect ? 'fadeIn' : 'fadeOut'](fadeSpeedIn);
+			};
+			// Loop all the images converting them by the webworker (this process is unobstrusive and it does not block the page loading)
+			var _webWorkerLoop = function () {
+				if (!imagesArray.length) return;
 
-                    // no webworker slow implementation
-                    for (; i < length; i += 4) {
-                        grey = px[i] * 0.3 + px[i + 1] * 0.59 + px[i + 2] * 0.11;
-                        px[i] = px[i + 1] = px[i + 2] = grey;
-                    }
+				BnWWorker.postMessage(imagesArray[0].imageData);
 
-                    ctx.putImageData(imageData, 0, 0);
-                }
-            };
+				BnWWorker.onmessage = function (event) {
+					imagesArray[0].ctx.putImageData(event.data, 0, 0);
+					imagesArray.splice(0,1);
 
-            var injectTags = function (pic, currImageWrapper) {
-        
-                var src = pic.src;
+					_webWorkerLoop();
+				};
+			};
+			//convert any image into B&W using HTML5 canvas
+			var _manipulateImage = function (img, canvas, width, height) {
+				var ctx = canvas.getContext('2d'),
+					currImg = img,
+					i = 0,
+					grey;
 
-                if (supportsCanvas) {
+				ctx.drawImage(img, 0, 0, width, height);
 
-                    var currWidth = $(currImageWrapper).find('img').width(),
-                        currHeight = $(currImageWrapper).find('img').height(),
-                        realWidth = pic.width,
-                        realHeight = pic.height;
+				var imageData = ctx.getImageData(0, 0, width, height),
+					px = imageData.data,
+					length = px.length;
 
-                    //adding the canvas
-                    $('<canvas width="' + realWidth + '" height="' + realHeight + '"></canvas>').prependTo(currImageWrapper);
-                    //getting the canvas
-                    var currCanvas = $(currImageWrapper).find('canvas');
-                    //setting the canvas position on the Pics
-                    $(currCanvas).css({
-                        'position': 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: currWidth,
-                        height: currHeight,
-                        display: invertHoverEffect ? 'none' : 'block'
-                    });
+				// web worker superfast implementation
+				if (BnWWorker) {
 
-                    greyImages(pic, currCanvas[0], realWidth, realHeight);
+					imagesArray.push({
+						imageData:imageData,
+						ctx:ctx
+					});
 
-                    if (hoverEffect) {
-                        $(currImageWrapper).mouseenter(function () {
-                            if(!invertHoverEffect) {
-                                $(this).find('canvas').stop(true, true).fadeOut(fadeSpeedOut);
-                            } else {
-                                $(this).find('canvas').stop(true, true).fadeIn(fadeSpeedIn);
-                            }
-                        });
-                        $(currImageWrapper).mouseleave(function () {
-                            if(!invertHoverEffect) {
-                                $(this).find('canvas').stop(true, true).fadeIn(fadeSpeedIn);
-                            } else {
-                                $(this).find('canvas').stop(true, true).fadeOut(fadeSpeedOut);
-                            }
-                        });
-                    }
-                } else {
+				} else {
 
-                    var ieWidth = $(currImageWrapper).find('img').prop('width');
-                    var ieHeight = $(currImageWrapper).find('img').prop('height');
+					// no webworker slow implementation
+					for (; i < length; i += 4) {
+						grey = px[i] * 0.3 + px[i + 1] * 0.59 + px[i + 2] * 0.11;
+						px[i] = px[i + 1] = px[i + 2] = grey;
+					}
 
-                    //adding the canvas
-                    $('<img src=' + src + ' width="' + ieWidth + '" height="' + ieHeight + '" class="ieFix" /> ').prependTo(currImageWrapper);
-                    $('.ieFix').css({
-                        'position': 'absolute',
-                        top: 0,
-                        left: 0,
-                        'filter': 'progid:DXImageTransform.Microsoft.BasicImage(grayscale=1)',
-                        display: invertHoverEffect ? 'none' : 'block'
-                    });
+					ctx.putImageData(imageData, 0, 0);
+				}
+			};
 
-                    if (hoverEffect) {
-                        $(currImageWrapper).mouseenter(function () {
-                            if(!invertHoverEffect) {
-                                $(this).children('.ieFix').stop(true, true).fadeOut(fadeSpeedOut);
-                            } else {
-                                $(this).children('.ieFix').stop(true, true).fadeIn(fadeSpeedIn);
-                            }
-                        });
-                        $(currImageWrapper).mouseleave(function () {
-                            if(!invertHoverEffect) {
-                                $(this).children('.ieFix').stop(true, true).fadeIn(fadeSpeedIn);
-                            } else {
-                                $(this).children('.ieFix').stop(true, true).fadeOut(fadeSpeedOut);
-                            }
-                        });
-                    }
-                }
-            };
-            this.init = function (options) {
+			var _injectTags = function (pic, $imageWrapper) {
 
-                $(container).each(function (index, currImageWrapper) {
-                    var pic = new Image();
-                    pic.src = $(currImageWrapper).find('img').prop("src");
+				var src = pic.src,
+					$img = $imageWrapper.find('img'),
+					css = {
+							'position': 'absolute',
+							top: 0,
+							left: 0,
+							display: invertHoverEffect ? 'none' : 'block'
+						};
 
-                    if (!pic.width) {
-                        $(pic).on("load", function() {injectTags( pic, currImageWrapper);});
-                    } else {
-                        injectTags( pic, currImageWrapper );
-                    }
-                });
+				if (supportsCanvas && !cssfilters) {
 
-                
-                if (responsive) {
-                    $window.on('resize orientationchange', container.resizeImages);
-                }
-            };
+					var width = $img.width(),
+						height = $img.height(),
+						realWidth = pic.width,
+						realHeight = pic.height;
 
-            this.resizeImages = function () {
-                
-                $(container).each(function (index, currImageWrapper) {
-                    var pic = $(currImageWrapper).find('img:not(.ieFix)');
-                    var currWidth,currHeight;
-                    if (isIE7) {
-                        currWidth = $(pic).prop('width');
-                        currHeight = $(pic).prop('height');
-                    } else {
-                        currWidth = $(pic).width();
-                        currHeight = $(pic).height();
-                    }
+					//adding the canvas
+					$('<canvas class="BWfade" width="' + realWidth + '" height="' + realHeight + '"></canvas>').prependTo($imageWrapper);
+					//getting the canvas
+					var $canvas = $imageWrapper.find('canvas');
+					//setting the canvas position on the Pics
+					$canvas.css($.extend(css,{
+						width: width,
+						height: height
+					}));
 
-                    $(this).find('.ieFix, canvas').css({
-                        width: currWidth,
-                        height: currHeight
-                    });
+					_manipulateImage(pic, $canvas[0], realWidth, realHeight);
 
-                });
-            };
+				} else {
 
-            return self.init(options);
+					var ieWidth = $img.prop('width');
+					var ieHeight = $img.prop('height');
+					css[cssPrefix('Filter')] = 'grayscale(100%)';
+					//adding the canvas
+					$('<img src=' + src + ' width="' + ieWidth + '" height="' + ieHeight + '" class="BWFilter BWfade" /> ').prependTo($imageWrapper);
+					$('.BWFilter').css($.extend(css,{
+							'filter': 'progid:DXImageTransform.Microsoft.BasicImage(grayscale=1)'
+					}));
+				}
+			};
+			this.init = function (options) {
+				// convert all the images
+				$container.each(function (index, tmpImageWrapper) {
+					var pic = new Image(),
+						$imageWrapper = $(tmpImageWrapper);
+					pic.src = $imageWrapper.find('img').prop("src");
 
-        }
+					if (!pic.width) {
+						$(pic).on("load", function() {_injectTags( pic, $imageWrapper);});
+					} else {
+						_injectTags( pic, $imageWrapper );
+					}
+				});
+				// start the webworker
+				if (BnWWorker) {
+					// web worker implementation
+					_webWorkerLoop();
+				}
+				// binding the hover effect
+				if (hoverEffect) {
 
-    });
+					$container.on('mouseleave', _onMouseLeave);
+					$container.on('mouseenter', _onMouseEnter);
+				}
+				// make it responsive
+				if (responsive) {
+					$window.on('resize orientationchange', $container.resizeImages);
+				}
+			};
+
+			this.resizeImages = function () {
+
+				$container.each(function (index, currImageWrapper) {
+					var pic = $(currImageWrapper).find('img:not(.BWFilter)');
+					var currWidth,currHeight;
+					if (isIE7) {
+						currWidth = $(pic).prop('width');
+						currHeight = $(pic).prop('height');
+					} else {
+						currWidth = $(pic).width();
+						currHeight = $(pic).height();
+					}
+
+					$(this).find('.BWFilter, canvas').css({
+						width: currWidth,
+						height: currHeight
+					});
+
+				});
+			};
+
+			return this.init(options);
+
+		}
+
+	});
 }(jQuery));
