@@ -1,6 +1,6 @@
 /**
  *
- * Version: 0.2.5
+ * Version: 0.2.6
  * Author:  Gianluca Guarini
  * Contact: gianluca.guarini@gmail.com
  * Website: http://www.gianlucaguarini.com/
@@ -161,18 +161,20 @@
 
 				var src = pic.src,
 					$img = $imageWrapper.find('img'),
+					width = $img.width(),
+					height = $img.height(),
 					css = {
 							'position': 'absolute',
 							top: 0,
 							left: 0,
-							display: invertHoverEffect ? 'none' : 'block'
+							display: invertHoverEffect ? 'none' : 'block',
+							width:width,
+							height:height
 						};
 
 				if (supportsCanvas && !cssfilters) {
 
-					var width = $img.width(),
-						height = $img.height(),
-						realWidth = pic.width,
+					var realWidth = pic.width,
 						realHeight = pic.height;
 
 					//adding the canvas
@@ -180,23 +182,17 @@
 					//getting the canvas
 					var $canvas = $imageWrapper.find('canvas');
 					//setting the canvas position on the Pics
-					$canvas.css($.extend(css,{
-						width: width,
-						height: height
-					}));
+					$canvas.css(css);
 
 					_manipulateImage(pic, $canvas[0], realWidth, realHeight);
 
 				} else {
 
-					var ieWidth = $img.prop('width');
-					var ieHeight = $img.prop('height');
 					css[cssPrefix('Filter')] = 'grayscale(100%)';
 					//adding the canvas
-					$('<img src=' + src + ' width="' + ieWidth + '" height="' + ieHeight + '" class="BWFilter BWfade" /> ').prependTo($imageWrapper);
-					$('.BWFilter').css($.extend(css,{
-							'filter': 'progid:DXImageTransform.Microsoft.BasicImage(grayscale=1)'
-					}));
+					$('<img src=' + src + ' width="' + width + '" height="' + height + '" class="BWFilter BWfade" /> ')
+						.prependTo($imageWrapper)
+						.css($.extend(css,{'filter': 'progid:DXImageTransform.Microsoft.BasicImage(grayscale=1)'}));
 				}
 			};
 			this.init = function (options) {
