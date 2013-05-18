@@ -7,7 +7,7 @@ Read the plugin API on here http://www.gianlucaguarini.com/canvas-experiments/jQ
 
 
 <pre>
-	<script src="js/jQuery.BlackAndWhite.js"></script>
+    &lt;script src="js/jQuery.BlackAndWhite.js"&gt;&lt;/script&gt;
 </pre>
 
 2 Set the image wrappers using the css:
@@ -38,7 +38,7 @@ $(window).load(function(){
             fadeOut: 800 // 800ms for fadeOut animations
         },
         onImageReady:function(img) {
-        	// this callback gets executed anytime an image gets converted
+        	// this callback gets executed anytime an image is converted
         }
     });
 });
