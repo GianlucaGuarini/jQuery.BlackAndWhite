@@ -33,6 +33,11 @@ iframe {
 #wrapper li {
 	float:left;
 	margin: 15px 30px 15px 0;
+	background: url(css/loader.gif) center center no-repeat;
+}
+#wrapper li a {
+	opacity:0;
+	filter:alpha(opacity=0);
 }
 #wrapper li.last {
 	float:left;
@@ -58,7 +63,12 @@ $(window).load(function(){
 
 	$('.bwWrapper').BlackAndWhite({
 		hoverEffect:true,
-		webworkerPath: 'js/'
+		webworkerPath: 'js/',
+		onImageReady:function(img){
+			$(img).parent().animate({
+				opacity:1
+			});
+		}
 	});
 });
 </script>

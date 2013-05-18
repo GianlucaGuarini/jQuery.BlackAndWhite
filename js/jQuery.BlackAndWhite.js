@@ -39,7 +39,8 @@
 					webworkerPath: false,
 					responsive: true,
 					invertHoverEffect: false,
-					speed: 500
+					speed: 500,
+					onImageReady:null
 				};
 				options = $.extend(defaults, options);
 
@@ -79,6 +80,7 @@
 				return property.toLowerCase();
 			};
 
+
 			// https://github.com/Modernizr/Modernizr/blob/master/feature-detects/css-filters.js
 			var cssfilters = function () {
 				var el = document.createElement('div');
@@ -108,8 +110,12 @@
 			var _onMouseLeave = function (e) {
 				$(e.currentTarget).find('.BWfade').stop(true, true)[!invertHoverEffect ? 'fadeIn' : 'fadeOut'](fadeSpeedIn);
 			};
-			var _onMouseEnter= function (e) {
+			var _onMouseEnter = function (e) {
 				$(e.currentTarget).find('.BWfade').stop(true, true)[invertHoverEffect ? 'fadeIn' : 'fadeOut'](fadeSpeedIn);
+			};
+			var _onImageReady = function(img) {
+				if (typeof options.onImageReady === 'function')
+					options.onImageReady(img);
 			};
 			// Loop all the images converting them by the webworker (this process is unobstrusive and it does not block the page loading)
 			var _webWorkerLoop = function () {
@@ -119,8 +125,8 @@
 
 				BnWWorker.onmessage = function (event) {
 					imagesArray[0].ctx.putImageData(event.data, 0, 0);
+					_onImageReady(imagesArray[0].img);
 					imagesArray.splice(0,1);
-
 					_webWorkerLoop();
 				};
 			};
@@ -142,7 +148,8 @@
 
 					imagesArray.push({
 						imageData:imageData,
-						ctx:ctx
+						ctx:ctx,
+						img:img
 					});
 
 				} else {
@@ -154,13 +161,15 @@
 					}
 
 					ctx.putImageData(imageData, 0, 0);
+
+					_onImageReady(img);
 				}
 			};
 
-			var _injectTags = function (pic, $imageWrapper) {
+			var _injectTags = function ($img, $imageWrapper) {
 
-				var src = pic.src,
-					$img = $imageWrapper.find('img'),
+				var pic = $img[0],
+					src = pic.src,
 					width = $img.width(),
 					height = $img.height(),
 					css = {
@@ -190,25 +199,24 @@
 
 					css[cssPrefix('Filter')] = 'grayscale(100%)';
 					//adding the canvas
+					$('<img src=' + src + ' width="' + width + '" height="' + height + '" class="BWFilter BWfade" /> ').prependTo($imageWrapper);
+					$('.BWFilter').css($.extend(css,{
+							'filter': 'progid:DXImageTransform.Microsoft.BasicImage(grayscale=1)'
+					}));
 
-					$('<img src=' + src + ' width="' + width + '" height="' + height + '" class="BWFilter BWfade" /> ')
-						.prependTo($imageWrapper)
-						.css($.extend(css,{'filter': 'progid:DXImageTransform.Microsoft.BasicImage(grayscale=1)'}));
-
+					_onImageReady(pic);
 				}
 			};
 			this.init = function (options) {
 				// convert all the images
 				$container.each(function (index, tmpImageWrapper) {
-					var pic = new Image(),
-						$imageWrapper = $(tmpImageWrapper);
-					pic.src = $imageWrapper.find('img').prop("src");
+					var $imageWrapper = $(tmpImageWrapper),
+						$pic = $imageWrapper.find('img');
 
-					if (!pic.width) {
-						$(pic).on("load", function() {_injectTags( pic, $imageWrapper);});
-					} else {
-						_injectTags( pic, $imageWrapper );
-					}
+					if (!$pic.width())
+						$pic.on("load", function() {_injectTags( $pic, $imageWrapper);});
+					else
+						_injectTags( $pic, $imageWrapper );
 				});
 				// start the webworker
 				if (BnWWorker) {

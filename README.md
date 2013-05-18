@@ -1,25 +1,69 @@
 This plug-in can easily convert every colored image (in an html page) into a B&W greyscale image.
 Read the plugin API on here http://www.gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/demo.html.
 
----------
-Plugin Showcase
----------
+#Usage
 
-<ul>
-	<li><a href="http://teocomi.com/photos/">Teocomi.com</a></li>
-	<li><a href="http://www.deejay.it/dj/extra/widget">Deejay.it</a></li>
-	<li><a href="http://www.unitedesigners.it/#!/124-tailored-branding">United Designers</a></li>
-</ul>
+1 Include the plug into the page:
 
----------
 
-If your want add a new entry please fork this README file
-=================
+<pre>
+	<script src="js/jQuery.BlackAndWhite.js"></script>
+</pre>
 
-IMPORTANT
-=================
+2 Set the image wrappers using the css:
+
+<pre>
+.bwWrapper {
+    position:relative;
+    display:block;
+}
+</pre>
+
+3 Initialize the plug in on window load (no <code>$(document).ready()</code>):
+
+
+
+<pre>
+$(window).load(function(){
+    $('.bwWrapper').BlackAndWhite({
+        hoverEffect : true, // default true
+        // set the path to BnWWorker.js for a superfast implementation
+        webworkerPath : false,
+        // for the images with a fluid width and height 
+        responsive:true,
+        // to invert the hover effect
+        invertHoverEffect: false,
+        speed: { //this property could also be just speed: value for both fadeIn and fadeOut
+            fadeIn: 200, // 200ms for fadeIn animations
+            fadeOut: 800 // 800ms for fadeOut animations
+        },
+        onImageReady:function(img) {
+        	// this callback gets executed anytime an image gets converted
+        }
+    });
+});
+</pre>
+
+
+
+## IMPORTANT
+
 the script works only for the images hosted on the same server in which the page is loaded!
 
-THANKS
-=================
+
+## Plugin Showcase
+
+
+*   [Teocomi.com](http://teocomi.com/photos/)
+*   [Deejay.it](http://www.deejay.it/dj/extra/widget)
+*   [United Designers](http://www.unitedesigners.it/#!/124-tailored-branding)
+
+If your want add a new entry please fork this README file
+
+---------
+
+
+
+## THANKS
+
 Thanks to Jeffrey Way for the inspiration ( http://jeffrey-way.com/ )
