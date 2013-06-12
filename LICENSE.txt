@@ -1,12 +1,12 @@
 /**
  *
- * Version: 	0.1.0
+ * Version: 	0.2.6
  * Author:		Gianluca Guarini
- * Contact: 		gianluca.guarini@gmail.com
+ * Contact: 	gianluca.guarini@gmail.com
  * Website:		http://www.gianlucaguarini.com/
  * Twitter:		@gianlucaguarini
  *
- * Copyright (c) 2011 Gianluca Guarini
+ * Copyright (c) 2013 Gianluca Guarini
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
