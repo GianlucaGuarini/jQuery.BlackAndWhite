@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Jquery.blackandwhite by GianlucaGuarini</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Jquery.blackandwhite</h1>
+        <p>This plug-in can easily convert any colored image (in an html page) into a B&amp;W greyscale image.</p>
+
+        <p class="view"><a href="https://github.com/GianlucaGuarini/jQuery.BlackAndWhite">View the Project on GitHub <small>GianlucaGuarini/jQuery.BlackAndWhite</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/GianlucaGuarini/jQuery.BlackAndWhite/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/GianlucaGuarini/jQuery.BlackAndWhite/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/GianlucaGuarini/jQuery.BlackAndWhite">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p>This plug-in can easily convert every colored image (in an html page) into a B&amp;W greyscale image.
+Read the plugin API on here <a href="http://www.gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/demo.html">http://www.gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/demo.html</a>.</p>
+
+<h1>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h1>
+
+<p>1 Include the plug into the page:</p>
+
+<pre>
+    &lt;script src="js/jQuery.BlackAndWhite.js"&gt;&lt;/script&gt;
+</pre>
+
+<p>2 Set the image wrappers using the css:</p>
+
+<pre>
+.bwWrapper {
+    position:relative;
+    display:block;
+}
+</pre>
+
+<p>3 Initialize the plug in on window load (no <code>$(document).ready()</code>):</p>
+
+<pre>
+$(window).load(function(){
+    $('.bwWrapper').BlackAndWhite({
+        hoverEffect : true, // default true
+        // set the path to BnWWorker.js for a superfast implementation
+        webworkerPath : false,
+        // for the images with a fluid width and height 
+        responsive:true,
+        // to invert the hover effect
+        invertHoverEffect: false,
+        speed: { //this property could also be just speed: value for both fadeIn and fadeOut
+            fadeIn: 200, // 200ms for fadeIn animations
+            fadeOut: 800 // 800ms for fadeOut animations
+        },
+        onImageReady:function(img) {
+            // this callback gets executed anytime an image is converted
+        }
+    });
+});
+</pre>
+
+<h2>
+<a name="important" class="anchor" href="#important"><span class="octicon octicon-link"></span></a>IMPORTANT</h2>
+
+<p>the script works only for the images hosted on the same server in which the page is loaded!</p>
+
+<h2>
+<a name="plugin-showcase" class="anchor" href="#plugin-showcase"><span class="octicon octicon-link"></span></a>Plugin Showcase</h2>
+
+<ul>
+<li>  <a href="http://themeforest.net/item/spartan-clean-responsive-business-template/full_screen_preview/3019206">spartan-clean-responsive-business-template</a>
+</li>
+<li>  <a href="http://teocomi.com/photos/">Teocomi.com</a>
+</li>
+<li>  <a href="http://www.deejay.it/dj/extra/widget">Deejay.it</a>
+</li>
+<li>  <a href="http://www.unitedesigners.it/#!/124-tailored-branding">United Designers</a>
+</li>
+</ul><p>If your want add a new entry please fork this README file</p>
+
+<hr><h2>
+<a name="thanks" class="anchor" href="#thanks"><span class="octicon octicon-link"></span></a>THANKS</h2>
+
+<p>Thanks to Jeffrey Way for the inspiration ( <a href="http://jeffrey-way.com/">http://jeffrey-way.com/</a> )</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/GianlucaGuarini">GianlucaGuarini</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-8059670-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
