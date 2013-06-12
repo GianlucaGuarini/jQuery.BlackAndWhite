@@ -1,5 +1,5 @@
 This plug-in can easily convert every colored image (in an html page) into a B&W greyscale image.
-Read the plugin API on here http://www.gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/demo.html.
+Read the plugin API on here http://gianlucaguarini.github.io/jQuery.BlackAndWhite/.
 
 #Usage
 
