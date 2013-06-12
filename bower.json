@@ -1,7 +1,7 @@
 {
-  "name": "jQuery.BlackAndWhite",
+  "name": "jquery.BlackAndWhite",
   "version": "0.2.6",
-  "main": "jQuery.BlackAndWhite.js",
+  "main": "jquery.BlackAndWhite.js",
   "ignore": [
     "**/.*",
     "node_modules",
