@@ -1,57 +1,103 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Jquery.blackandwhite by GianlucaGuarini</title>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>jQuery.BlackAndWhite - Gianluca Guarini</title>
+        <meta name="Description" content="This jQuery plug-in can easly convert every colored image (in an html page) into a B&amp;W greyscale image." />
+        <meta name="Keywords"  content="JavaScript,HTML5,jQuery.BlackAndWhite.js,jQuery plugin" />
+        <meta name="viewport" content="width=device-width">
+        <!--[if lt IE 9]>
+        <script src="https://raw.github.com/aFarkas/html5shiv/4525162dd10e6fff7b83d06b28b562586e9fb058/src/html5shiv.js"></script>
+        <![endif]-->
+        
+        <script src="http://yandex.st/highlightjs/6.1/highlight.min.js"></script>
+        <link rel="stylesheet" href="http://yandex.st/highlightjs/6.1/styles/dark.css">
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="js/jQuery.BlackAndWhite.js"></script>
+        <meta property="og:title" content="jQuery.BlackAndWhite"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="http://gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/"/>
+        <meta property="og:image" content="http://gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/css/img/jQuery.blackAndWhite-logo.png"/>
+        <meta property="og:description"
+              content="This jQuery plug-in can easly convert every colored image (in an html page) into a B&amp;W greyscale image."/>
+        
+        <link href='http://fonts.googleapis.com/css?family=Quicksand:400,300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/style.css">
+        <style>
+        .wrapper li {
+			background: url(css/loader.gif) center center no-repeat;
+		}
+        .wrapper li a {
+			opacity:0;
+			filter:alpha(opacity=0);
+		}
+        </style>
+        <script>
+            hljs.tabReplace = '    ';
+            hljs.initHighlightingOnLoad();
+           
+            //init
+            $(window).load(function(){
+            	$('.bwWrapper').BlackAndWhite({
+            		hoverEffect:true,
+            		webworkerPath: 'js/',
+            		onImageReady:function(img){
+            			$(img).parent().animate({
+            				opacity:1
+            			});
+            		}
+            	});
+            });
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        </script>
+    </head>
+    <body>
+   <!--[if lt IE 7]>
+    <p class="chromeframe">
+        You are using an outdated browser.
+        <a href="http://browsehappy.com/">Upgrade your browser today</a>
+        or
+        <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a>
+        to better experience this site.
+    </p>
     <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Jquery.blackandwhite</h1>
-        <p>This plug-in can easily convert any colored image (in an html page) into a B&amp;W greyscale image.</p>
+    <div class="container">
+        <a href="https://github.com/GianlucaGuarini/jQuery.BlackAndWhite"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+        <h1 class="title">
+            <img src="css/img/jQuery.blackAndWhite-logo.png" />
+            jQuery.BlackAndWhite
+        </h1>
+        <h1>Description</h1>
+        <p>This plug-in can easily convert any colored image into a B&amp;W greyscale image. It uses the the HTML5 canvas tag and a fallback for the old browsers</p>
+        <h1>Usage</h1>
+    <p>
+        1 Include the plug into the page:
+    </p>
+<pre><code>
+&lt;script src="js/jQuery.BlackAndWhite.js"&gt;&lt;/script&gt;
 
-        <p class="view"><a href="https://github.com/GianlucaGuarini/jQuery.BlackAndWhite">View the Project on GitHub <small>GianlucaGuarini/jQuery.BlackAndWhite</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/GianlucaGuarini/jQuery.BlackAndWhite/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/GianlucaGuarini/jQuery.BlackAndWhite/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/GianlucaGuarini/jQuery.BlackAndWhite">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <p>This plug-in can easily convert every colored image (in an html page) into a B&amp;W greyscale image.
-Read the plugin API on here <a href="http://www.gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/demo.html">http://www.gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/demo.html</a>.</p>
-
-<h1>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h1>
-
-<p>1 Include the plug into the page:</p>
-
-<pre>
-    &lt;script src="js/jQuery.BlackAndWhite.js"&gt;&lt;/script&gt;
-</pre>
-
-<p>2 Set the image wrappers using the css:</p>
-
-<pre>
+</code></pre>
+    <p>
+        2 Set the image wrappers using the css:
+    </p>
+<pre><code class="css">
 .bwWrapper {
     position:relative;
     display:block;
 }
-</pre>
 
-<p>3 Initialize the plug in on window load (no <code>$(document).ready()</code>):</p>
+</code></pre>
 
-<pre>
+    <p>
+        3 Initialize the plug in on window load (no $(document).ready()):
+    </p>
+    <pre><code class="javascript">
 $(window).load(function(){
     $('.bwWrapper').BlackAndWhite({
         hoverEffect : true, // default true
@@ -66,52 +112,96 @@ $(window).load(function(){
             fadeOut: 800 // 800ms for fadeOut animations
         },
         onImageReady:function(img) {
-            // this callback gets executed anytime an image is converted
+        	// this callback gets executed anytime an image is converted
         }
     });
 });
-</pre>
 
-<h2>
-<a name="important" class="anchor" href="#important"><span class="octicon octicon-link"></span></a>IMPORTANT</h2>
-
-<p>the script works only for the images hosted on the same server in which the page is loaded!</p>
-
-<h2>
-<a name="plugin-showcase" class="anchor" href="#plugin-showcase"><span class="octicon octicon-link"></span></a>Plugin Showcase</h2>
-
-<ul>
-<li>  <a href="http://themeforest.net/item/spartan-clean-responsive-business-template/full_screen_preview/3019206">spartan-clean-responsive-business-template</a>
-</li>
-<li>  <a href="http://teocomi.com/photos/">Teocomi.com</a>
-</li>
-<li>  <a href="http://www.deejay.it/dj/extra/widget">Deejay.it</a>
-</li>
-<li>  <a href="http://www.unitedesigners.it/#!/124-tailored-branding">United Designers</a>
-</li>
-</ul><p>If your want add a new entry please fork this README file</p>
-
-<hr><h2>
-<a name="thanks" class="anchor" href="#thanks"><span class="octicon octicon-link"></span></a>THANKS</h2>
-
-<p>Thanks to Jeffrey Way for the inspiration ( <a href="http://jeffrey-way.com/">http://jeffrey-way.com/</a> )</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/GianlucaGuarini">GianlucaGuarini</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+</code></pre>
+    <h2>Demo</h2>
+    
+    <ul class="wrapper">
+        <li>
+            <a href="#" class="bwWrapper">
+                <img  src="files/image1.jpg" width="100%"  />
+            </a>
+        </li>
+        <li>
+            <a href="#" class="bwWrapper">
+                <img  src="files/image2.jpg" width="100%"  />
+            </a>
+        </li>
+        <li>
+            <a href="#" class="bwWrapper">
+                <img  src="files/image3.jpg" width="100%"  />
+            </a>
+        </li>
+        <li>
+            <a href="#" class="bwWrapper">
+                <img  src="files/image4.jpg" width="100%"  />
+            </a>
+        </li>
+        <li>
+            <a href="#" class="bwWrapper">
+                <img  src="files/image5.jpg" width="100%"  />
+            </a>
+        </li>
+        <li>
+            <a href="#" class="bwWrapper">
+                <img  src="files/image6.jpg" width="100%"  />
+            </a>
+        </li>
+        <li>
+            <a href="#" class="bwWrapper">
+                <img  src="files/image7.jpg" width="100%"  />
+            </a>
+        </li>
+        <li>
+            <a href="#" class="bwWrapper">
+                <img  src="files/image8.jpg" width="100%"  />
+            </a>
+        </li>
+    </ul>
+    <div class="clearfix"></div>
+    <h1>Other examples</h1>
+    <ul>
+        <li><a href="invertHoverEffect.html">Hover effect inverted</a></li>
+        <li><a href="ajax-contents.html">Ajax contents</a></li>
+    </ul>
+    <h1>Download</h1>
+    <ul>
+        <li><a href="https://github.com/GianlucaGuarini/jQuery.BlackAndWhite">jQuery.BlackAndWhite</a></li>
+    </ul>
+        <aside class="addthis_toolbox addthis_default_style">
+            <h2 class="visuallyhidden">Share links</h2>
+            <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+            
+            <a class="addthis_button_tweet" tw:via="gianlucaguarini"></a>
+            <a class="addthis_button_google_plusone" g:plusone:size="medium"></a> 
+            <a class="addthis_button_pinterest_pinit"></a>
+            <a class="addthis_counter addthis_pill_style"></a>
+        </aside>
+        <small>
+            &copy;
+            <a href="http://www.gianlucaguarini.com" target="_blank">Gianluca Guarini 2013</a> - All Images Right Reserved
+        </small>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-8059670-3");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
 
-  </body>
+    <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=xa-507887fc43c4ab03"></script>
+
+    <script type="text/javascript">
+    var addthis_config = {
+           data_track_clickback: false
+        };
+         var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-8059670-3']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+    </script>
+</body>
 </html>
