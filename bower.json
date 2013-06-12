@@ -8,6 +8,7 @@
     "components",
     "*.html",
     "files",
+    "css",
     "src/jquery.min.js"
   ]
 }
