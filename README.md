@@ -56,7 +56,6 @@ the script works only for the images hosted on the same server in which the page
 *   [Circle Theme](http://kopatheme.com/demo/circle/html/portfolio-1col.html)
 *   [spartan-clean-responsive-business-template](http://themeforest.net/item/spartan-clean-responsive-business-template/full_screen_preview/3019206)
 *   [Teocomi.com](http://teocomi.com/photos/)
-*   [Deejay.it](http://www.deejay.it/dj/extra/widget)
 *   [United Designers](http://www.unitedesigners.it/#!/124-tailored-branding)
 
 If your want add a new entry please fork this README file
