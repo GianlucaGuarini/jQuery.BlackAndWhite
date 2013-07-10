@@ -1,6 +1,6 @@
 /**
  *
- * Version: 0.2.6
+ * Version: 0.2.7
  * Author:  Gianluca Guarini
  * Contact: gianluca.guarini@gmail.com
  * Website: http://www.gianlucaguarini.com/
@@ -50,11 +50,11 @@
 			 * 
 			 */
 			var hoverEffect = options.hoverEffect,
-				webworkerPath = options.webworkerPath,
-				invertHoverEffect = options.invertHoverEffect,
-				responsive = options.responsive,
-				fadeSpeedIn = $.isPlainObject(options.speed) ? options.speed.fadeIn : options.speed,
-				fadeSpeedOut = $.isPlainObject(options.speed) ? options.speed.fadeOut : options.speed;
+					webworkerPath = options.webworkerPath,
+					invertHoverEffect = options.invertHoverEffect,
+					responsive = options.responsive,
+					fadeSpeedIn = $.isPlainObject(options.speed) ? options.speed.fadeIn : options.speed,
+					fadeSpeedOut = $.isPlainObject(options.speed) ? options.speed.fadeOut : options.speed;
 
 			var isIE7 = (document.all && !window.opera && window.XMLHttpRequest) ? true : false;
 
@@ -93,14 +93,14 @@
 			 * 
 			 */
 			var supportsCanvas = !!document.createElement('canvas').getContext,
-				$window = $(window),
-			/* Check if Web Workers are supported */
-				supportWebworker = (function () {
-					return (typeof (Worker) !== "undefined") ? true : false;
-				}()),
-				cssFilter = cssPrefix('Filter'),
-				imagesArray = [],
-				BnWWorker = supportWebworker && webworkerPath ? new Worker(webworkerPath + "BnWWorker.js") : false;
+					$window = $(window),
+					/* Check if Web Workers are supported */
+					supportWebworker = (function () {
+						return (typeof (Worker) !== "undefined") ? true : false;
+					}()),
+					cssFilter = cssPrefix('Filter'),
+					imagesArray = [],
+					BnWWorker = supportWebworker && webworkerPath ? new Worker(webworkerPath + "BnWWorker.js") : false;
 
 			/**
 			*
@@ -108,7 +108,7 @@
 			* 
 			*/
 			var _onMouseLeave = function (e) {
-				$(e.currentTarget).find('.BWfade').stop(true, true)[!invertHoverEffect ? 'fadeIn' : 'fadeOut'](fadeSpeedIn);
+				$(e.currentTarget).find('.BWfade').stop(true, true)[!invertHoverEffect ? 'fadeIn' : 'fadeOut'](fadeSpeedOut);
 			};
 			var _onMouseEnter = function (e) {
 				$(e.currentTarget).find('.BWfade').stop(true, true)[invertHoverEffect ? 'fadeIn' : 'fadeOut'](fadeSpeedIn);
@@ -133,9 +133,9 @@
 			//convert any image into B&W using HTML5 canvas
 			var _manipulateImage = function (img, canvas, width, height) {
 				var ctx = canvas.getContext('2d'),
-					currImg = img,
-					i = 0,
-					grey;
+						currImg = img,
+						i = 0,
+						grey;
 
 				ctx.drawImage(img, 0, 0, width, height);
 
@@ -169,22 +169,19 @@
 			var _injectTags = function ($img, $imageWrapper) {
 
 				var pic = $img[0],
-					src = pic.src,
-					width = $img.width(),
-					height = $img.height(),
-					css = {
-							'position': 'absolute',
-							top: 0,
-							left: 0,
-							display: invertHoverEffect ? 'none' : 'block',
-							width:width,
-							height:height
-						};
-
+						src = pic.src,
+						width = $img.width(),
+						height = $img.height(),
+						css = {
+										'position': 'absolute',
+										top: 0,
+										left: 0,
+										display: invertHoverEffect ? 'none' : 'block'
+									};
 				if (supportsCanvas && !cssfilters) {
 
 					var realWidth = pic.width,
-						realHeight = pic.height;
+							realHeight = pic.height;
 
 					//adding the canvas
 					$('<canvas class="BWfade" width="' + realWidth + '" height="' + realHeight + '"></canvas>').prependTo($imageWrapper);
@@ -196,7 +193,7 @@
 					_manipulateImage(pic, $canvas[0], realWidth, realHeight);
 
 				} else {
-
+					
 					css[cssPrefix('Filter')] = 'grayscale(100%)';
 					//adding the canvas
 					$('<img src=' + src + ' width="' + width + '" height="' + height + '" class="BWFilter BWfade" /> ').prependTo($imageWrapper);
@@ -238,15 +235,9 @@
 			this.resizeImages = function () {
 
 				$container.each(function (index, currImageWrapper) {
-					var pic = $(currImageWrapper).find('img:not(.BWFilter)');
-					var currWidth,currHeight;
-					if (isIE7) {
-						currWidth = $(pic).prop('width');
-						currHeight = $(pic).prop('height');
-					} else {
-						currWidth = $(pic).width();
-						currHeight = $(pic).height();
-					}
+					var pic = $(currImageWrapper).find('img:not(.BWFilter)'),
+							currWidth = isIE7 ? $(pic).prop('width') : $(pic).width(),
+							currHeight = isIE7 ? $(pic).prop('height') : $(pic).height();
 
 					$(this).find('.BWFilter, canvas').css({
 						width: currWidth,
