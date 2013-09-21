@@ -1,10 +1,6 @@
 /**
  *
-<<<<<<< HEAD:js/jQuery.BlackAndWhite.js
- * Version: 0.2.7
-=======
  * Version: 0.2.8
->>>>>>> d5fe12c04b4004970d2abe7b421121d189493aca:jquery.BlackAndWhite.js
  * Author:  Gianluca Guarini
  * Contact: gianluca.guarini@gmail.com
  * Website: http://www.gianlucaguarini.com/
@@ -56,20 +52,12 @@
 			 *
 			 */
 			var hoverEffect = options.hoverEffect,
-<<<<<<< HEAD:js/jQuery.BlackAndWhite.js
-					webworkerPath = options.webworkerPath,
-					invertHoverEffect = options.invertHoverEffect,
-					responsive = options.responsive,
-					fadeSpeedIn = $.isPlainObject(options.speed) ? options.speed.fadeIn : options.speed,
-					fadeSpeedOut = $.isPlainObject(options.speed) ? options.speed.fadeOut : options.speed;
-=======
 				webworkerPath = options.webworkerPath,
 				invertHoverEffect = options.invertHoverEffect,
 				responsive = options.responsive,
 				intensity = (typeof options.intensity === 'number' && options.intensity < 1 && options.intensity > 0) ? options.intensity : 1,
 				fadeSpeedIn = $.isPlainObject(options.speed) ? options.speed.fadeIn : options.speed,
 				fadeSpeedOut = $.isPlainObject(options.speed) ? options.speed.fadeOut : options.speed;
->>>>>>> d5fe12c04b4004970d2abe7b421121d189493aca:jquery.BlackAndWhite.js
 
 			var isIE7 = (document.all && !window.opera && window.XMLHttpRequest) ? true : false;
 
@@ -107,24 +95,6 @@
 			 * Private vars
 			 *
 			 */
-<<<<<<< HEAD:js/jQuery.BlackAndWhite.js
-			var supportsCanvas = !!document.createElement('canvas').getContext,
-					$window = $(window),
-					/* Check if Web Workers are supported */
-					supportWebworker = (function () {
-						return (typeof (Worker) !== "undefined") ? true : false;
-					}()),
-					cssFilter = cssPrefix('Filter'),
-					imagesArray = [],
-					BnWWorker = supportWebworker && webworkerPath ? new Worker(webworkerPath + "BnWWorker.js") : false;
-
-			/**
-			*
-			* Private methods
-			* 
-			*/
-			var _onMouseLeave = function (e) {
-=======
 			var supportsCanvas = !! document.createElement('canvas').getContext,
 				$window = $(window),
 				/* Check if Web Workers are supported */
@@ -141,7 +111,6 @@
 			 *
 			 */
 			var _onMouseLeave = function(e) {
->>>>>>> d5fe12c04b4004970d2abe7b421121d189493aca:jquery.BlackAndWhite.js
 				$(e.currentTarget).find('.BWfade').stop(true, true)[!invertHoverEffect ? 'fadeIn' : 'fadeOut'](fadeSpeedOut);
 			};
 			var _onMouseEnter = function(e) {
@@ -162,7 +131,7 @@
 					if (BnWWorker.close)
 						BnWWorker.close();
 					return;
-				};
+				}
 
 				BnWWorker.postMessage({
 					imgData:imagesArray[0].imageData,
@@ -179,9 +148,9 @@
 			//convert any image into B&W using HTML5 canvas
 			var _manipulateImage = function(img, canvas, width, height) {
 				var ctx = canvas.getContext('2d'),
-						currImg = img,
-						i = 0,
-						grey;
+					currImg = img,
+					i = 0,
+					grey;
 
 				ctx.drawImage(img, 0, 0, width, height);
 
@@ -217,17 +186,6 @@
 			var _injectTags = function($img, $imageWrapper) {
 
 				var pic = $img[0],
-<<<<<<< HEAD:js/jQuery.BlackAndWhite.js
-						src = pic.src,
-						width = $img.width(),
-						height = $img.height(),
-						css = {
-										'position': 'absolute',
-										top: 0,
-										left: 0,
-										display: invertHoverEffect ? 'none' : 'block'
-									};
-=======
 					src = pic.src,
 					width = $img.width(),
 					height = $img.height(),
@@ -237,11 +195,10 @@
 						left: 0,
 						display: invertHoverEffect ? 'none' : 'block'
 					};
->>>>>>> d5fe12c04b4004970d2abe7b421121d189493aca:jquery.BlackAndWhite.js
 				if (supportsCanvas && !cssfilters) {
 
 					var realWidth = pic.width,
-							realHeight = pic.height;
+						realHeight = pic.height;
 
 					//adding the canvas
 					$('<canvas class="BWfade" width="' + realWidth + '" height="' + realHeight + '"></canvas>').prependTo($imageWrapper);
@@ -253,13 +210,8 @@
 					_manipulateImage(pic, $canvas[0], realWidth, realHeight);
 
 				} else {
-<<<<<<< HEAD:js/jQuery.BlackAndWhite.js
-					
-					css[cssPrefix('Filter')] = 'grayscale(100%)';
-=======
 
 					css[cssPrefix('Filter')] = 'grayscale(' + intensity * 100 + '%)';
->>>>>>> d5fe12c04b4004970d2abe7b421121d189493aca:jquery.BlackAndWhite.js
 					//adding the canvas
 					$('<img src=' + src + ' width="' + width + '" height="' + height + '" class="BWFilter BWfade" /> ').prependTo($imageWrapper);
 					$('.BWFilter').css($.extend(css, {
@@ -299,21 +251,12 @@
 				}
 			};
 
-<<<<<<< HEAD:js/jQuery.BlackAndWhite.js
-			this.resizeImages = function () {
-
-				$container.each(function (index, currImageWrapper) {
-					var pic = $(currImageWrapper).find('img:not(.BWFilter)'),
-							currWidth = isIE7 ? $(pic).prop('width') : $(pic).width(),
-							currHeight = isIE7 ? $(pic).prop('height') : $(pic).height();
-=======
 			this.resizeImages = function() {
 
 				$container.each(function(index, currImageWrapper) {
 					var pic = $(currImageWrapper).find('img:not(.BWFilter)'),
 						currWidth = isIE7 ? $(pic).prop('width') : $(pic).width(),
 						currHeight = isIE7 ? $(pic).prop('height') : $(pic).height();
->>>>>>> d5fe12c04b4004970d2abe7b421121d189493aca:jquery.BlackAndWhite.js
 
 					$(this).find('.BWFilter, canvas').css({
 						width: currWidth,

@@ -131,7 +131,7 @@
 					if (BnWWorker.close)
 						BnWWorker.close();
 					return;
-				};
+				}
 
 				BnWWorker.postMessage({
 					imgData:imagesArray[0].imageData,

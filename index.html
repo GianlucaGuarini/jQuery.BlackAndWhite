@@ -16,8 +16,8 @@
         
         <script src="http://yandex.st/highlightjs/6.1/highlight.min.js"></script>
         <link rel="stylesheet" href="http://yandex.st/highlightjs/6.1/styles/dark.css">
-        <script src="js/jquery.min.js"></script>
-        <script src="js/jQuery.BlackAndWhite.js"></script>
+        <script src="src/jquery.min.js"></script>
+        <script src="src/jQuery.BlackAndWhite.js"></script>
         <meta property="og:title" content="jQuery.BlackAndWhite"/>
         <meta property="og:type" content="website"/>
         <meta property="og:url" content="http://gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/"/>
@@ -46,7 +46,7 @@
             $(window).load(function(){
             	$('.bwWrapper').BlackAndWhite({
             		hoverEffect:true,
-            		webworkerPath: 'js/',
+            		webworkerPath: 'src/',
             		onImageReady:function(img){
             			$(img).parent().animate({
             				opacity:1
