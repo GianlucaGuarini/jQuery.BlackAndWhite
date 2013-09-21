@@ -29,8 +29,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  **/
-;
-(function($) {
+!(function($) {
 	$.fn.extend({
 		BlackAndWhite: function(options) {
 			'use strict';
@@ -131,7 +130,7 @@
 					if (BnWWorker.close)
 						BnWWorker.close();
 					return;
-				};
+				}
 
 				BnWWorker.postMessage({
 					imgData:imagesArray[0].imageData,
@@ -189,10 +188,11 @@
 					src = pic.src,
 					width = $img.width(),
 					height = $img.height(),
+					position = $img.position(),
 					css = {
 						'position': 'absolute',
-						top: 0,
-						left: 0,
+						top: position.top,
+						left: position.left,
 						display: invertHoverEffect ? 'none' : 'block'
 					};
 				if (supportsCanvas && !cssfilters) {
