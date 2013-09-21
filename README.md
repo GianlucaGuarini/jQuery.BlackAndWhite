@@ -6,13 +6,13 @@ Read the plugin API on here http://gianlucaguarini.github.io/jQuery.BlackAndWhit
 1 Include the plug into the page:
 
 
-<pre class="html">
-    &lt;script src="js/jQuery.BlackAndWhite.js"&gt;&lt;/script&gt;
+<pre lang="html">
+&lt;script src="js/jQuery.BlackAndWhite.js"&gt;&lt;/script&gt;
 </pre>
 
 2 Set the image wrappers using the css:
 
-<pre class="css">
+<pre lang="css">
 .bwWrapper {
     position:relative;
     display:block;
@@ -23,7 +23,7 @@ Read the plugin API on here http://gianlucaguarini.github.io/jQuery.BlackAndWhit
 
 
 
-<pre class="javascript">
+<pre lang="javascript">
 $(window).load(function(){
     $('.bwWrapper').BlackAndWhite({
         hoverEffect : true, // default true
