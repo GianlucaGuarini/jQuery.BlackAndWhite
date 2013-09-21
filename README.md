@@ -6,13 +6,13 @@ Read the plugin API on here http://gianlucaguarini.github.io/jQuery.BlackAndWhit
 1 Include the plug into the page:
 
 
-<pre>
+<pre class="html">
     &lt;script src="js/jQuery.BlackAndWhite.js"&gt;&lt;/script&gt;
 </pre>
 
 2 Set the image wrappers using the css:
 
-<pre>
+<pre class="css">
 .bwWrapper {
     position:relative;
     display:block;
@@ -23,7 +23,7 @@ Read the plugin API on here http://gianlucaguarini.github.io/jQuery.BlackAndWhit
 
 
 
-<pre>
+<pre class="javascript">
 $(window).load(function(){
     $('.bwWrapper').BlackAndWhite({
         hoverEffect : true, // default true
@@ -33,6 +33,8 @@ $(window).load(function(){
         responsive:true,
         // to invert the hover effect
         invertHoverEffect: false,
+        // this option works only on the modern browsers ( on IE lower than 9 it remains always 1)
+        intensity:1,
         speed: { //this property could also be just speed: value for both fadeIn and fadeOut
             fadeIn: 200, // 200ms for fadeIn animations
             fadeOut: 800 // 800ms for fadeOut animations

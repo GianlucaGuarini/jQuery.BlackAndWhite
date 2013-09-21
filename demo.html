@@ -64,6 +64,7 @@ $(window).load(function(){
 	$('.bwWrapper').BlackAndWhite({
 		hoverEffect:true,
 		webworkerPath: 'src/',
+		intensity:0.7,
 		onImageReady:function(img){
 			$(img).parent().animate({
 				opacity:1
