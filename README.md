@@ -1,18 +1,18 @@
 This plug-in can easily convert every colored image (in an html page) into a B&W greyscale image.
-Read the plugin API on here http://www.gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/demo.html.
+Read the plugin API on here http://gianlucaguarini.github.io/jQuery.BlackAndWhite/.
 
 #Usage
 
 1 Include the plug into the page:
 
 
-<pre>
+<pre class="html">
     &lt;script src="js/jQuery.BlackAndWhite.js"&gt;&lt;/script&gt;
 </pre>
 
 2 Set the image wrappers using the css:
 
-<pre>
+<pre class="css">
 .bwWrapper {
     position:relative;
     display:block;
@@ -23,7 +23,7 @@ Read the plugin API on here http://www.gianlucaguarini.com/canvas-experiments/jQ
 
 
 
-<pre>
+<pre class="javascript">
 $(window).load(function(){
     $('.bwWrapper').BlackAndWhite({
         hoverEffect : true, // default true
@@ -33,6 +33,8 @@ $(window).load(function(){
         responsive:true,
         // to invert the hover effect
         invertHoverEffect: false,
+        // this option works only on the modern browsers ( on IE lower than 9 it remains always 1)
+        intensity:1,
         speed: { //this property could also be just speed: value for both fadeIn and fadeOut
             fadeIn: 200, // 200ms for fadeIn animations
             fadeOut: 800 // 800ms for fadeOut animations
@@ -53,9 +55,9 @@ the script works only for the images hosted on the same server in which the page
 
 ## Plugin Showcase
 
+*   [Circle Theme](http://kopatheme.com/demo/circle/html/portfolio-1col.html)
 *   [spartan-clean-responsive-business-template](http://themeforest.net/item/spartan-clean-responsive-business-template/full_screen_preview/3019206)
 *   [Teocomi.com](http://teocomi.com/photos/)
-*   [Deejay.it](http://www.deejay.it/dj/extra/widget)
 *   [United Designers](http://www.unitedesigners.it/#!/124-tailored-branding)
 
 If your want add a new entry please fork this README file

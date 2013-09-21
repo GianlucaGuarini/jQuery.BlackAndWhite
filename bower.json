@@ -1,0 +1,14 @@
+{
+  "name": "jquery.BlackAndWhite",
+  "version": "0.2.7",
+  "main": "jquery.BlackAndWhite.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "*.html",
+    "files",
+    "css",
+    "src/jquery.min.js"
+  ]
+}

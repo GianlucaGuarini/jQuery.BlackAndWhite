@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Gianluca Guarini - black and white image jQuery plug-in</title>
+	<meta name="Description" content="This jQuery plug-in can easly convert every colored image (in an html page) into a B&W greyscale image." />
+	<meta name="Keywords"  content="JavaScript,HTML5,jQuery.BlackAndWhite.js,jQuery plugin" />
+	<link href='http://fonts.googleapis.com/css?family=Rosario' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+body {
+	margin: 20px auto;
+	padding: 0;
+	color:#999;
+	font-family: 'Rosario', sans-serif;
+	width:100%;
+}
+a {
+	color:#0072ca;
+}
+img {
+	border:none;
+}
+iframe {
+	display:inline;
+	float: left;
+}
+#wrapper {
+	list-style:none;
+	float:left;
+	padding:0;
+	clear:both;
+}
+li {
+	float:left;
+	margin: 15px 30px 15px 0;
+	width:30%;
+}
+li.last {
+	float:left;
+	margin: 15px 0 15px;
+}
+</style>
+
+	<link href="css/BlackAndWhite.css" rel="stylesheet">
+	<script src="src/jquery.min.js"></script>
+	<script src="jquery.BlackAndWhite.js"></script>
+
+</head>
+<body>
+	<h1>Crossbrowser Html5 Black and white jQuery plug in</h1>
+	<h2>Responsive demo</h2>
+
+	<h3>Demo</h3>
+	<ul id="wrapper">
+		<li>
+			<a target="_blank" href="http://twitter.com/gianlucaguarini" class="bwWrapper">
+				<img  src="files/twitter.jpg" width="100%" />
+			</a>
+		</li>
+		<li>
+			<a class="bwWrapper">
+				<img  src="files/big-img.jpg" width="100%" />
+			</a>
+		</li>
+		<li>
+			<a href="#" class="bwWrapper">
+				<img  src="files/Hydrangeas.jpg" width="40%" />
+			</a>
+		</li>
+		<li class="last">
+			<a href="#" class="bwWrapper">
+				<img  src="files/Desert.jpg" width="50%" />
+			</a>
+		</li>
+		<li>
+			<a href="#" class="bwWrapper">
+				<img  src="files/Chrysanthemum.jpg" width="100%" />
+			</a>
+		</li>
+		<li>
+			<a href="#" class="bwWrapper">
+				<img  src="files/Jellyfish.jpg" width="60%" />
+			</a>
+		</li>
+		<li class="last">
+			<a href="#" class="bwWrapper">
+				<img  src="files/Koala.jpg" width="100%" />
+			</a>
+		</li>
+		<li>
+			<a href="#" class="bwWrapper">
+				<img  src="files/Lighthouse.jpg" width="30%" />
+			</a>
+		</li>
+		<li>
+			<a href="#" class="bwWrapper">
+				<img  src="files/Penguins.jpg" width="90%" />
+			</a>
+		</li>
+		<li class="last">
+			<a href="#" class="bwWrapper">
+				<img  src="files/Tulips.jpg" width="100%" />
+			</a>
+		</li>
+	</ul>
+
+	<br />
+	<small>
+		&copy;
+		<a href="http://www.gianlucaguarini.com" target="_blank">Gianluca Guarini 2012</a>
+	</small>
+	<script>
+//init
+$(window).load(function(){
+	$('.bwWrapper').BlackAndWhite({
+		hoverEffect:true,
+		webworkerPath: 'src/'
+	});
+
+});
+</script>
+</body>
+</html>
