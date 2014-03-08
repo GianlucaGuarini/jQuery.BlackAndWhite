@@ -243,7 +243,6 @@
 				}
 				// binding the hover effect
 				if (hoverEffect) {
-
 					$container.on('mouseleave', _onMouseLeave);
 					$container.on('mouseenter', _onMouseEnter);
 				}
