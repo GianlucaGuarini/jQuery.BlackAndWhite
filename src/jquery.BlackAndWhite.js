@@ -1,12 +1,12 @@
 /**
  *
- * Version: 0.2.8
+ * Version: 0.2.9
  * Author:  Gianluca Guarini
  * Contact: gianluca.guarini@gmail.com
  * Website: http://www.gianlucaguarini.com/
  * Twitter: @gianlucaguarini
  *
- * Copyright (c) 2013 Gianluca Guarini
+ * Copyright (c) Gianluca Guarini
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -29,7 +29,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  **/
-!(function($) {
+(function($) {
 	$.fn.extend({
 		BlackAndWhite: function(options) {
 			'use strict';
@@ -133,7 +133,7 @@
 				}
 
 				BnWWorker.postMessage({
-					imgData:imagesArray[0].imageData,
+					imgData: imagesArray[0].imageData,
 					intensity: intensity
 				});
 
@@ -194,29 +194,31 @@
 						top: position.top,
 						left: position.left,
 						display: invertHoverEffect ? 'none' : 'block'
-					};
+					},
+					$overlay;
+
 				if (supportsCanvas && !cssfilters) {
 
 					var realWidth = pic.width,
 						realHeight = pic.height;
 
 					//adding the canvas
-					$('<canvas class="BWfade" width="' + realWidth + '" height="' + realHeight + '"></canvas>').prependTo($imageWrapper);
-					//getting the canvas
-					var $canvas = $imageWrapper.find('canvas');
+					$overlay = $('<canvas class="BWfade" width="' + realWidth + '" height="' + realHeight + '"></canvas>');
 					//setting the canvas position on the Pics
-					$canvas.css(css);
+					$overlay.css(css);
+					$overlay.prependTo($imageWrapper);
 
-					_manipulateImage(pic, $canvas[0], realWidth, realHeight);
+					_manipulateImage(pic, $overlay.get(0), realWidth, realHeight);
 
 				} else {
 
 					css[cssPrefix('Filter')] = 'grayscale(' + intensity * 100 + '%)';
 					//adding the canvas
-					$('<img src=' + src + ' width="' + width + '" height="' + height + '" class="BWFilter BWfade" /> ').prependTo($imageWrapper);
-					$('.BWFilter').css($.extend(css, {
+					$overlay = $('<img src=' + src + ' width="' + width + '" height="' + height + '" class="BWFilter BWfade" /> ');
+					$overlay.css($.extend(css, {
 						'filter': 'progid:DXImageTransform.Microsoft.BasicImage(grayscale=1)'
 					}));
+					$overlay.prependTo($imageWrapper);
 
 					_onImageReady(pic);
 				}
@@ -241,7 +243,6 @@
 				}
 				// binding the hover effect
 				if (hoverEffect) {
-
 					$container.on('mouseleave', _onMouseLeave);
 					$container.on('mouseenter', _onMouseEnter);
 				}
