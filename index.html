@@ -13,7 +13,7 @@
         <!--[if lt IE 9]>
         <script src="https://raw.github.com/aFarkas/html5shiv/4525162dd10e6fff7b83d06b28b562586e9fb058/src/html5shiv.js"></script>
         <![endif]-->
-        
+
         <script src="http://yandex.st/highlightjs/6.1/highlight.min.js"></script>
         <link rel="stylesheet" href="http://yandex.st/highlightjs/6.1/styles/dark.css">
         <script src="src/jquery.min.js"></script>
@@ -24,35 +24,35 @@
         <meta property="og:image" content="http://gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/css/img/jQuery.blackAndWhite-logo.png"/>
         <meta property="og:description"
               content="This jQuery plug-in can easly convert every colored image (in an html page) into a B&amp;W greyscale image."/>
-        
+
         <link href='http://fonts.googleapis.com/css?family=Quicksand:400,300' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/base.css">
         <link rel="stylesheet" href="css/style.css">
         <style>
         .wrapper li {
-			background: url(css/loader.gif) center center no-repeat;
-		}
+            background: url(css/loader.gif) center center no-repeat;
+        }
         .wrapper li a {
-			opacity:0;
-			filter:alpha(opacity=0);
-		}
+            opacity:0;
+            filter:alpha(opacity=0);
+        }
         </style>
         <script>
             hljs.tabReplace = '    ';
             hljs.initHighlightingOnLoad();
-           
+
             //init
             $(window).load(function(){
-            	$('.bwWrapper').BlackAndWhite({
-            		hoverEffect:true,
-            		webworkerPath: 'src/',
-            		onImageReady:function(img){
-            			$(img).parent().animate({
-            				opacity:1
-            			});
-            		}
-            	});
+                $('.bwWrapper').BlackAndWhite({
+                    hoverEffect:true,
+                    webworkerPath: 'src/',
+                    onImageReady:function(img){
+                        $(img).parent().animate({
+                            opacity:1
+                        });
+                    }
+                });
             });
 
         </script>
@@ -103,7 +103,7 @@ $(window).load(function(){
         hoverEffect : true, // default true
         // set the path to BnWWorker.js for a superfast implementation
         webworkerPath : false,
-        // for the images with a fluid width and height 
+        // for the images with a fluid width and height
         responsive:true,
         // to invert the hover effect
         invertHoverEffect: false,
@@ -114,14 +114,14 @@ $(window).load(function(){
             fadeOut: 800 // 800ms for fadeOut animations
         },
         onImageReady:function(img) {
-        	// this callback gets executed anytime an image is converted
+            // this callback gets executed anytime an image is converted
         }
     });
 });
 
 </code></pre>
     <h2>Demo</h2>
-    
+
     <ul class="wrapper">
         <li>
             <a href="#" class="bwWrapper">
@@ -177,9 +177,9 @@ $(window).load(function(){
         <aside class="addthis_toolbox addthis_default_style">
             <h2 class="visuallyhidden">Share links</h2>
             <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-            
+
             <a class="addthis_button_tweet" tw:via="gianlucaguarini"></a>
-            <a class="addthis_button_google_plusone" g:plusone:size="medium"></a> 
+            <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
             <a class="addthis_button_pinterest_pinit"></a>
             <a class="addthis_counter addthis_pill_style"></a>
         </aside>

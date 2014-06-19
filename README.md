@@ -29,7 +29,7 @@ $(window).load(function(){
         hoverEffect : true, // default true
         // set the path to BnWWorker.js for a superfast implementation
         webworkerPath : false,
-        // for the images with a fluid width and height 
+        // for the images with a fluid width and height
         responsive:true,
         // to invert the hover effect
         invertHoverEffect: false,
@@ -46,8 +46,6 @@ $(window).load(function(){
 });
 </pre>
 
-
-
 ## IMPORTANT
 
 the script works only for the images hosted on the same server in which the page is loaded!
@@ -63,8 +61,6 @@ the script works only for the images hosted on the same server in which the page
 If your want add a new entry please fork this README file
 
 ---------
-
-
 
 ## THANKS
 
