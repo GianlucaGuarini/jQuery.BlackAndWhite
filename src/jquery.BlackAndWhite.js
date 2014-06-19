@@ -1,6 +1,6 @@
 /**
  *
- * Version: 0.2.9
+ * Version: 0.3.0
  * Author:  Gianluca Guarini
  * Contact: gianluca.guarini@gmail.com
  * Website: http://www.gianlucaguarini.com/
@@ -94,7 +94,7 @@
 			 * Private vars
 			 *
 			 */
-			var supportsCanvas = !! document.createElement('canvas').getContext,
+			var supportsCanvas = !!document.createElement('canvas').getContext,
 				$window = $(window),
 				/* Check if Web Workers are supported */
 				supportWebworker = (function() {
@@ -190,7 +190,8 @@
 					height = $img.height(),
 					position = $img.position(),
 					css = {
-						'position': 'absolute',
+						position: 'absolute',
+						'-webkit-transform': 'translate3d(0,0,0)', // fix for webkit browsers
 						top: position.top,
 						left: position.left,
 						display: invertHoverEffect ? 'none' : 'block'
