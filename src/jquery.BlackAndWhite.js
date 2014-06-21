@@ -235,7 +235,7 @@
 					if (!$img[0].complete || (typeof $img[0].naturalWidth !== "undefined" && !$img[0].naturalWidth)) {
 						$img.on('load', function() {
 							_injectTags($img, $imageWrapper);
-						});
+						}).load();
 					} else {
 						_injectTags($img, $imageWrapper);
 					}
