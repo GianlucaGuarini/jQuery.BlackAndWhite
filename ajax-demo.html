@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Gianluca Guarini - black and white image jQuery plug-in</title>
+	<meta name="Description" content="This jQuery plug-in can easly convert every colored image (in an html page) into a B&W greyscale image." />
+	<meta name="Keywords"  content="JavaScript,HTML5,jQuery.BlackAndWhite.js,jQuery plugin" />
+	<link href='http://fonts.googleapis.com/css?family=Rosario' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+body {
+	margin: 20px auto;
+	padding: 0;
+	color:#999;
+	font-family: 'Rosario', sans-serif;
+	width:960px;
+}
+a {
+	color:#0072ca;
+}
+img {
+	border:none;
+}
+iframe {
+	display:inline;
+	float: left;
+}
+#wrapper {
+	list-style:none;
+	margin:10px 0;
+	float:left;
+	padding:0;
+}
+#wrapper li {
+	float:left;
+	margin: 15px 30px 15px 0;
+}
+#wrapper li a {
+	opacity:0;
+	filter:alpha(opacity=0);
+}
+#wrapper li.last {
+	float:left;
+	margin: 15px 0 15px;
+}
+</style>
+
+	<link href="css/BlackAndWhite.css" rel="stylesheet">
+
+	<script src="src/jquery.min.js"></script>
+	<script src="src/jquery.BlackAndWhite.js"></script>
+
+</head>
+<body>
+	<h1>Crossbrowser Html5 Black and white jQuery plug in</h1>
+	<h2>Responsive demo</h2>
+
+	<h3>Demo</h3>
+	<ul id="wrapper">
+	</ul>
+    <button class="ajaxTrigger">Load Images</button>
+	<br />
+	<small>
+		&copy;
+		<a href="http://www.gianlucaguarini.com" target="_blank">Gianluca Guarini</a>
+	</small>
+	<script>
+//init
+$(".ajaxTrigger").on("click",function() {
+	$.ajax({
+		url:"ajax-contents.html",
+		success: function ( data ) {
+			$("#wrapper").append(data);
+			$('.bwWrapper').BlackAndWhite({
+				hoverEffect:true,
+				webworkerPath: 'src/',
+				intensity:1,
+				onImageReady:function(img){
+					$(img).parent().animate({
+						opacity:1
+					});
+				}
+			});
+
+		}
+	});
+});
+
+
+</script>
+</body>
+</html>
