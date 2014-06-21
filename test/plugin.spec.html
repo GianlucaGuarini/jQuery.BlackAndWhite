@@ -52,16 +52,19 @@
     <script src="../src/jquery.min.js"></script>
     <script src="../src/jQuery.BlackAndWhite.js"></script>
     <script>
+        var assertion = 0;
+        console.log('TAP version 13');
+        console.log('1..9');
+        // this shit does not work!
         $('.bwWrapper').BlackAndWhite({
-            hoverEffect: true,
-            webworkerPath: '../src/',
-            intensity: 1,
             onImageReady: function(img) {
                 $(img).parent().animate({
                     opacity: 1
                 });
+                console.log('ok ' + (++assertion));
             }
         });
+
     </script>
 
     </body>
