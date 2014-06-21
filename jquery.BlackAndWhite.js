@@ -184,8 +184,8 @@
 
 			var _injectTags = function($img, $imageWrapper) {
 
-				var pic = $img[0],
-					src = pic.src,
+				var img = $img[0],
+					src = img.src,
 					width = $img.width(),
 					height = $img.height(),
 					position = $img.position(),
@@ -198,10 +198,12 @@
 					},
 					$overlay;
 
+				img.crossOrigin = 'anonymous';
+
 				if (supportsCanvas && !cssfilters) {
 
-					var realWidth = pic.width,
-						realHeight = pic.height;
+					var realWidth = img.width,
+						realHeight = img.height;
 
 					//adding the canvas
 					$overlay = $('<canvas class="BWfade" width="' + realWidth + '" height="' + realHeight + '"></canvas>');
@@ -209,7 +211,7 @@
 					$overlay.css(css);
 					$overlay.prependTo($imageWrapper);
 
-					_manipulateImage(pic, $overlay.get(0), realWidth, realHeight);
+					_manipulateImage(img, $overlay.get(0), realWidth, realHeight);
 
 				} else {
 
@@ -221,7 +223,7 @@
 					}));
 					$overlay.prependTo($imageWrapper);
 
-					_onImageReady(pic);
+					_onImageReady(img);
 				}
 			};
 			this.init = function(options) {
@@ -257,9 +259,9 @@
 			this.resizeImages = function() {
 
 				$container.each(function(index, currImageWrapper) {
-					var pic = $(currImageWrapper).find('img:not(.BWFilter)'),
-						currWidth = isIE7 ? $(pic).prop('width') : $(pic).width(),
-						currHeight = isIE7 ? $(pic).prop('height') : $(pic).height();
+					var img = $(currImageWrapper).find('img:not(.BWFilter)'),
+						currWidth = isIE7 ? $(img).prop('width') : $(img).width(),
+						currHeight = isIE7 ? $(img).prop('height') : $(img).height();
 
 					$(this).find('.BWFilter, canvas').css({
 						width: currWidth,
