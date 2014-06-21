@@ -54,23 +54,8 @@ iframe {
 	<link href="css/BlackAndWhite.css" rel="stylesheet">
 
 	<script src="src/jquery.min.js"></script>
-	<script src="jquery.BlackAndWhite.js"></script>
-	<script>
-//init
+	<script src="src/jquery.BlackAndWhite.js"></script>
 
-$(window).load(function(){
-	$('.bwWrapper').BlackAndWhite({
-		hoverEffect:true,
-		webworkerPath: 'src/',
-		intensity:1,
-		onImageReady:function(img){
-			$(img).parent().animate({
-				opacity:1
-			});
-		}
-	});
-});
-</script>
 
 </head>
 <body>
@@ -88,8 +73,7 @@ $(window).load(function(){
 	&lt;img src="path/to/your/image" width="image width" height="image height" / &gt;
 &lt;/div&gt;</code></pre>
 	<p>
-		3
-		<strong>set the wrapper in this way from the css:</strong>
+		3 <strong>set the wrapper in this way from the css:</strong>
 	</p>
 	<pre><code>.bwWrapper {
 	position:relative;
@@ -97,11 +81,7 @@ $(window).load(function(){
 }</code></pre>
 
 	<p>
-		4
-		<strong>initialize the plug in on
-			<span style="color:green">window load</span>
-			<span style="color:red">(no $(document).ready())</span></strong>
-		:
+		4 <strong>initialize the plug:
 	</p>
 	<pre><code>$(window).load(function(){
 	$('.bwWrapper').BlackAndWhite({
@@ -182,5 +162,18 @@ $(window).load(function(){
 		&copy;
 		<a href="http://www.gianlucaguarini.com" target="_blank">Gianluca Guarini</a>
 	</small>
+	<script>
+	//init
+	$('.bwWrapper').BlackAndWhite({
+		hoverEffect:true,
+		webworkerPath: 'src/',
+		intensity:1,
+		onImageReady:function(img){
+			$(img).parent().animate({
+				opacity:1
+			});
+		}
+	});
+	</script>
 </body>
 </html>

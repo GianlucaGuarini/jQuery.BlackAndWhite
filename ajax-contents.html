@@ -34,6 +34,10 @@ iframe {
 	float:left;
 	margin: 15px 30px 15px 0;
 }
+#wrapper li a {
+	opacity:0;
+	filter:alpha(opacity=0);
+}
 #wrapper li.last {
 	float:left;
 	margin: 15px 0 15px;
@@ -68,9 +72,18 @@ $(".ajaxTrigger").on("click",function() {
 			var $list = $(data).filter("#wrapper").find("li"),
 				$images = $list.find("img");
 			$("#wrapper").append($list);
-			$images.on("load",function (){
-				$(this).parent().BlackAndWhite();
+
+			$('.bwWrapper').BlackAndWhite({
+				hoverEffect:true,
+				webworkerPath: 'src/',
+				intensity:1,
+				onImageReady:function(img){
+					$(img).parent().animate({
+						opacity:1
+					});
+				}
 			});
+
 		}
 	});
 });

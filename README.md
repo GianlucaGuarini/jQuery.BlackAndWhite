@@ -19,9 +19,7 @@ Read the plugin API on here http://gianlucaguarini.github.io/jQuery.BlackAndWhit
 }
 </pre>
 
-3 Initialize the plug in on window load (no <code>$(document).ready()</code>):
-
-
+3 Initialize the plug in:
 
 <pre lang="javascript">
 $(window).load(function(){
