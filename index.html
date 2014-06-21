@@ -42,6 +42,20 @@
             hljs.tabReplace = '    ';
             hljs.initHighlightingOnLoad();
         </script>
+        <script>
+        $(function(){
+            $('.bwWrapper').BlackAndWhite({
+                hoverEffect:true,
+                webworkerPath: 'src/',
+                onImageReady:function(img){
+                    $(img).parent().animate({
+                        opacity:1
+                    });
+                }
+            });
+        });
+
+        </script>
     </head>
     <body>
    <!--[if lt IE 7]>
@@ -175,17 +189,6 @@ $(window).load(function(){
             <a href="http://www.gianlucaguarini.com" target="_blank">Gianluca Guarini 2013</a> - All Images Right Reserved
         </small>
     </div>
-    <script>
-        $('.bwWrapper').BlackAndWhite({
-            hoverEffect:true,
-            webworkerPath: 'src/',
-            onImageReady:function(img){
-                $(img).parent().animate({
-                    opacity:1
-                });
-            }
-        });
-    </script>
     <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=xa-507887fc43c4ab03"></script>
 
     <script type="text/javascript">
