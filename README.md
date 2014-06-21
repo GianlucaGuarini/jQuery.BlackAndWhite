@@ -21,7 +21,7 @@ Read the plugin API on here http://gianlucaguarini.github.io/jQuery.BlackAndWhit
 3 Initialize the plug in:
 
 <pre lang="javascript">
-$(window).load(function(){
+
     $('.bwWrapper').BlackAndWhite({
         hoverEffect : true, // default true
         // set the path to BnWWorker.js for a superfast implementation
@@ -40,7 +40,7 @@ $(window).load(function(){
         	// this callback gets executed anytime an image is converted
         }
     });
-});
+
 </pre>
 
 ## IMPORTANT
