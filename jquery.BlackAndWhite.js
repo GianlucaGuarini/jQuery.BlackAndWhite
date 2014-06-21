@@ -227,11 +227,12 @@
 				}
 			};
 			this.init = function(options) {
+
 				// convert all the images
 				$container.each(function(index, tmpImageWrapper) {
 					var $imageWrapper = $(tmpImageWrapper),
 						$img = $imageWrapper.find('img');
-
+					if ($img.data('_b&w')) return;
 					if (!$img[0].complete || (typeof $img[0].naturalWidth !== "undefined" && !$img[0].naturalWidth)) {
 						$img.on('load', function() {
 							_injectTags($img, $imageWrapper);
@@ -239,6 +240,7 @@
 					} else {
 						_injectTags($img, $imageWrapper);
 					}
+					$img.data('_b&w', true);
 				});
 				// start the webworker
 				if (BnWWorker) {
