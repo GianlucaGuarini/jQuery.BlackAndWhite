@@ -5,7 +5,6 @@ Read the plugin API on here http://gianlucaguarini.github.io/jQuery.BlackAndWhit
 
 1 Include the plug into the page:
 
-
 <pre lang="html">
 &lt;script src="js/jQuery.BlackAndWhite.js"&gt;&lt;/script&gt;
 </pre>
@@ -56,10 +55,3 @@ the script works only for the images hosted on the same server in which the page
 *   [Teocomi.com](http://teocomi.com/photos/)
 *   [United Designers](http://www.unitedesigners.it/#!/124-tailored-branding)
 
-If your want add a new entry please fork this README file
-
----------
-
-## THANKS
-
-Thanks to Jeffrey Way for the inspiration ( http://jeffrey-way.com/ )
