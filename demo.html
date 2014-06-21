@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Gianluca Guarini - black and white image jQuery plug-in</title>
+	<meta name="Description" content="This jQuery plug-in can easly convert every colored image (in an html page) into a B&W greyscale image." />
+	<meta name="Keywords"  content="JavaScript,HTML5,jQuery.BlackAndWhite.js,jQuery plugin" />
+	<link href='http://fonts.googleapis.com/css?family=Rosario' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+body {
+	margin: 20px auto;
+	padding: 0;
+	color:#999;
+	font-family: 'Rosario', sans-serif;
+	width:960px;
+}
+a {
+	color:#0072ca;
+}
+img {
+	border:none;
+}
+iframe {
+	display:inline;
+	float: left;
+}
+#wrapper {
+	list-style:none;
+	margin:10px 0;
+	float:left;
+	padding:0;
+}
+#wrapper li {
+	float:left;
+	margin: 15px 30px 15px 0;
+	background: url(css/loader.gif) center center no-repeat;
+}
+#wrapper li a {
+	opacity:0;
+	filter:alpha(opacity=0);
+}
+#wrapper li.last {
+	float:left;
+	margin: 15px 0 15px;
+}
+</style>
+	<script src="http://yandex.st/highlightjs/6.1/highlight.min.js"></script>
+	<link rel="stylesheet" href="http://yandex.st/highlightjs/6.1/styles/dark.css">
+	<script>
+  hljs.tabReplace = '    ';
+  hljs.initHighlightingOnLoad();
+</script>
+
+	<link href="css/BlackAndWhite.css" rel="stylesheet">
+
+	<script src="src/jquery.min.js"></script>
+	<script src="src/jquery.BlackAndWhite.js"></script>
+
+
+</head>
+<body>
+	<h1>Crossbrowser Html5 Black and white jQuery plug in</h1>
+	<h2>Just one line of JS Code</h2>
+	<p>
+		1 <strong>add jQuery and plug in to the page</strong>
+	</p>
+	<pre><code class="html">&lt;script src=&quot;js/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/jQuery.BlackAndWhite.js&quot;&gt;&lt;/script&gt;</code></pre>
+	<p>
+		2 <strong>add this class to the wrapper of the image that you want make in Black and White</strong>
+	</p>
+	<pre><code class="html">&lt;div class="bwWrapper" &gt;
+	&lt;img src="path/to/your/image" width="image width" height="image height" / &gt;
+&lt;/div&gt;</code></pre>
+	<p>
+		3 <strong>set the wrapper in this way from the css:</strong>
+	</p>
+	<pre><code>.bwWrapper {
+	position:relative;
+	display:block;
+}</code></pre>
+
+	<p>
+		4 <strong>initialize the plug:
+	</p>
+	<pre><code>$(window).load(function(){
+	$('.bwWrapper').BlackAndWhite({
+		hoverEffect : true, // default true
+		// set the path to BnWWorker.js for a superfast implementation
+		webworkerPath : false,
+		// for the images with a fluid width and height
+		responsive:true,
+		// this option works only on the modern browsers ( on IE lower than 9 it remains always 1)
+		intensity:1,
+		speed: { //this property could also be just speed: value for both fadeIn and fadeOut
+	        fadeIn: 200, // 200ms for fadeIn animations
+	        fadeOut: 800 // 800ms for fadeOut animations
+	    }
+	});
+});</code></pre>
+	<h3>Demo</h3>
+	<ul id="wrapper">
+		<li>
+			<a target="_blank" href="http://twitter.com/gianlucaguarini" class="bwWrapper">
+				<img  src="files/twitter.jpg" width="300" height="225" />
+			</a>
+		</li>
+		<li>
+			<a href="#" class="bwWrapper">
+				<img  src="files/Hydrangeas.jpg" width="300" height="225" />
+			</a>
+		</li>
+		<li class="last">
+			<a href="#" class="bwWrapper">
+				<img  src="files/Desert.jpg" width="300" height="225" />
+			</a>
+		</li>
+		<li>
+			<a href="#" class="bwWrapper">
+				<img  src="files/Chrysanthemum.jpg" width="300" height="225" />
+			</a>
+		</li>
+		<li>
+			<a href="#" class="bwWrapper">
+				<img  src="files/Jellyfish.jpg" width="300" height="225" />
+			</a>
+		</li>
+		<li class="last">
+			<a href="#" class="bwWrapper">
+				<img  src="files/Koala.jpg" width="300" height="225" />
+			</a>
+		</li>
+		<li>
+			<a href="#" class="bwWrapper">
+				<img  src="files/Lighthouse.jpg" width="300" height="225" />
+			</a>
+		</li>
+		<li>
+			<a href="#" class="bwWrapper">
+				<img  src="files/Penguins.jpg" width="300" height="225" />
+			</a>
+		</li>
+		<li class="last">
+			<a href="#" class="bwWrapper">
+				<img  src="files/Tulips.jpg" width="300" height="225" />
+			</a>
+		</li>
+	</ul>
+    <h3>Features</h3>
+	<ul>
+		<li><a href="responsive.html">Responsive Demo</a></li>
+        <li><a href="invertHoverEffect.html">Hover effect inverted</a></li>
+        <li><a href="ajax-contents.html">Ajax contents</a></li>
+	</ul>
+
+	<p>
+		<a href="https://github.com/GianlucaGuarini/jQuery.BlackAndWhite">Download on Github</a>
+	</p>
+
+	<br />
+	<small>
+		&copy;
+		<a href="http://www.gianlucaguarini.com" target="_blank">Gianluca Guarini</a>
+	</small>
+	<script>
+	//init
+	$('.bwWrapper').BlackAndWhite({
+		hoverEffect:true,
+		webworkerPath: 'src/',
+		intensity:1,
+		onImageReady:function(img){
+			$(img).parent().animate({
+				opacity:1
+			});
+		}
+	});
+	</script>
+</body>
+</html>

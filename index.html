@@ -41,20 +41,6 @@
         <script>
             hljs.tabReplace = '    ';
             hljs.initHighlightingOnLoad();
-
-            //init
-            $(window).load(function(){
-                $('.bwWrapper').BlackAndWhite({
-                    hoverEffect:true,
-                    webworkerPath: 'src/',
-                    onImageReady:function(img){
-                        $(img).parent().animate({
-                            opacity:1
-                        });
-                    }
-                });
-            });
-
         </script>
     </head>
     <body>
@@ -95,7 +81,7 @@
 </code></pre>
 
     <p>
-        3 Initialize the plug in on window load (no $(document).ready()):
+        3 Initialize the plug:
     </p>
     <pre><code class="javascript">
 $(window).load(function(){
@@ -167,6 +153,7 @@ $(window).load(function(){
     <div class="clearfix"></div>
     <h1>Other examples</h1>
     <ul>
+        <li><a href="responsive.html">Responsive Demo</a></li>
         <li><a href="invertHoverEffect.html">Hover effect inverted</a></li>
         <li><a href="ajax-contents.html">Ajax contents</a></li>
     </ul>
@@ -188,7 +175,17 @@ $(window).load(function(){
             <a href="http://www.gianlucaguarini.com" target="_blank">Gianluca Guarini 2013</a> - All Images Right Reserved
         </small>
     </div>
-
+    <script>
+        $('.bwWrapper').BlackAndWhite({
+            hoverEffect:true,
+            webworkerPath: 'src/',
+            onImageReady:function(img){
+                $(img).parent().animate({
+                    opacity:1
+                });
+            }
+        });
+    </script>
     <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=xa-507887fc43c4ab03"></script>
 
     <script type="text/javascript">
