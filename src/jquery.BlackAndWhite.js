@@ -67,7 +67,7 @@
          * Private vars
          *
          */
-
+        _tmpID = '_' + new Date().getTime(),
         _isIE7 = (document.all && !window.opera && window.XMLHttpRequest) ? true : false,
 
         /**
@@ -80,8 +80,8 @@
         _cssPrefixString = {},
         _cssPrefix = function(property) {
           if (_cssPrefixString[property] || _cssPrefixString[property] === '') return _cssPrefixString[property] + property;
-          var e = document.createElement('div');
-          var prefixes = ['', 'Moz', 'Webkit', 'O', 'ms', 'Khtml']; // Various supports...
+          var e = document.createElement('div'),
+            prefixes = ['', 'Moz', 'Webkit', 'O', 'ms', 'Khtml']; // Various supports...
           for (var i in prefixes) {
             if (typeof e.style[prefixes[i] + property] !== 'undefined') {
               _cssPrefixString[property] = prefixes[i];
@@ -267,28 +267,30 @@
         _initWebworker(imageslength);
         // binding the hover effect
         if (hoverEffect) {
-          $el.on('mouseleave', _onMouseLeave);
-          $el.on('mouseenter', _onMouseEnter);
+          $el.on('mouseleave.' + _tmpID, _onMouseLeave);
+          $el.on('mouseenter.' + _tmpID, _onMouseEnter);
         }
         // make it responsive
         if (responsive) {
-          $window.on('resize orientationchange', this.resizeImages);
+          $window.on('resize.' + _tmpID + ' orientationchange.' + _tmpID, this.resizeImages);
         }
       };
 
       this.resizeImages = function() {
-
         $el.each(function(index, currImageWrapper) {
           var img = $(currImageWrapper).find('img:not(.BWFilter)'),
             currWidth = _isIE7 ? $(img).prop('width') : $(img).width(),
             currHeight = _isIE7 ? $(img).prop('height') : $(img).height();
-
           $(this).find('.BWFilter, canvas').css({
             width: currWidth,
             height: currHeight
           });
-
         });
+      };
+
+      this.destroy = function() {
+        $window.off('.' + _tmpID, this.resizeImages);
+        $el.off('.' + _tmpID);
       };
 
       return this.init(options);
