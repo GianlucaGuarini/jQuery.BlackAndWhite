@@ -13,11 +13,15 @@
     "images"
   ],
   "testling": {
-    "files": ["test/*.html", "src/**/**/*.js"],
+    "html": "test/plugin.spec.html",
     "browsers": [
-      "ie/8..latest",
-      "chrome/latest",
-      "firefox/latest"
+      "ie/7..latest",
+      "chrome/20..latest",
+      "firefox/10..latest",
+      "safari/latest",
+      "opera/11.0..latest",
+      "iphone/6..latest",
+      "ipad/6..latest"
     ]
   },
   "author": "Gianluca Guarini <gianluca.guarini@gmail.com> (http://gianlucaguarini.com/)",
