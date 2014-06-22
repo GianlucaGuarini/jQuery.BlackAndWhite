@@ -20,8 +20,9 @@
       "firefox/10..latest",
       "safari/latest",
       "opera/11.0..latest",
-      "iphone/6..latest",
-      "ipad/6..latest"
+      "iphone/6",
+      "ipad/6",
+      "android-browser/latest"
     ]
   },
   "author": "Gianluca Guarini <gianluca.guarini@gmail.com> (http://gianlucaguarini.com/)",
