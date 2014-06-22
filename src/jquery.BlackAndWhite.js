@@ -1,6 +1,6 @@
 /**
  *
- * Version: 0.3.1
+ * Version: 0.3.2
  * Author:  Gianluca Guarini
  * Contact: gianluca.guarini@gmail.com
  * Website: http://www.gianlucaguarini.com/
@@ -235,7 +235,9 @@
 					if ($img.data('_b&w')) return;
 					if (!$img[0].complete || (typeof $img[0].naturalWidth !== "undefined" && !$img[0].naturalWidth)) {
 						$img.on('load', function() {
+							if ($img.data('_b&w_loaded')) return;
 							_injectTags($img, $imageWrapper);
+							$img.data('_b&w_loaded', true);
 						}).load();
 					} else {
 						_injectTags($img, $imageWrapper);
@@ -243,7 +245,8 @@
 					$img.data('_b&w', true);
 				});
 				// start the webworker
-				if (BnWWorker) {
+				if (BnWWorker && supportsCanvas && !cssfilters) {
+
 					// web worker implementation
 					_webWorkerLoop();
 				}
