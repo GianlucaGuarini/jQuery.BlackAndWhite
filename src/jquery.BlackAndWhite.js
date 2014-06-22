@@ -144,6 +144,9 @@
 					_webWorkerLoop();
 				};
 			};
+			var _isImageLoaded = function(img) {
+				return img.complete || (typeof img.naturalWidth !== "undefined" && img.naturalWidth);
+			};
 			//convert any image into B&W using HTML5 canvas
 			var _manipulateImage = function(img, canvas, width, height) {
 				var ctx = canvas.getContext('2d'),
@@ -233,9 +236,9 @@
 					var $imageWrapper = $(tmpImageWrapper),
 						$img = $imageWrapper.find('img');
 					if ($img.data('_b&w')) return;
-					if (!$img[0].complete || (typeof $img[0].naturalWidth !== "undefined" && !$img[0].naturalWidth)) {
+					if (!_isImageLoaded($img[0])) {
 						$img.on('load', function() {
-							if ($img.data('_b&w_loaded')) return;
+							if ($img.data('_b&w_loaded') || !_isImageLoaded($img[0])) return;
 							_injectTags($img, $imageWrapper);
 							$img.data('_b&w_loaded', true);
 						}).load();
@@ -246,7 +249,6 @@
 				});
 				// start the webworker
 				if (BnWWorker && supportsCanvas && !cssfilters) {
-
 					// web worker implementation
 					_webWorkerLoop();
 				}
