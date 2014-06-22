@@ -1,0 +1,120 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@1.4.14
+3 info using node@v0.10.29
+4 verbose readDependencies using package.json deps
+5 verbose install where, deps [ '/Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite',
+5 verbose install   [ 'grunt',
+5 verbose install     'grunt-cli',
+5 verbose install     'grunt-contrib-copy',
+5 verbose install     'grunt-contrib-jshint',
+5 verbose install     'grunt-contrib-uglify' ] ]
+6 info preinstall jQuery.BlackAndWhite@0.3.2
+7 verbose readDependencies using package.json deps
+8 verbose already installed skipping grunt-contrib-copy@^0.5.0 /Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite
+9 verbose already installed skipping grunt@^0.4.3 /Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite
+10 verbose already installed skipping grunt-cli@^0.1.13 /Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite
+11 verbose already installed skipping grunt-contrib-jshint@^0.8.0 /Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite
+12 verbose already installed skipping grunt-contrib-uglify@^0.4.0 /Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite
+13 silly resolved []
+14 info build /Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite
+15 verbose linkStuff [ false, false, false, '/Users/gianlucaguarini/Sites/www' ]
+16 info linkStuff jQuery.BlackAndWhite@0.3.2
+17 verbose linkBins jQuery.BlackAndWhite@0.3.2
+18 verbose linkMans jQuery.BlackAndWhite@0.3.2
+19 verbose rebuildBundles jQuery.BlackAndWhite@0.3.2
+20 verbose rebuildBundles [ '.bin',
+20 verbose rebuildBundles   'chai',
+20 verbose rebuildBundles   'grunt',
+20 verbose rebuildBundles   'grunt-cli',
+20 verbose rebuildBundles   'grunt-contrib-copy',
+20 verbose rebuildBundles   'grunt-contrib-jshint',
+20 verbose rebuildBundles   'grunt-contrib-uglify',
+20 verbose rebuildBundles   'jquery',
+20 verbose rebuildBundles   'jsdom',
+20 verbose rebuildBundles   'mocha' ]
+21 verbose rebuild bundle /Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite/node_modules/chai
+22 info build /Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite/node_modules/chai
+23 info preinstall chai@1.9.1
+24 verbose linkStuff [ false,
+24 verbose linkStuff   false,
+24 verbose linkStuff   false,
+24 verbose linkStuff   '/Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite/node_modules' ]
+25 info linkStuff chai@1.9.1
+26 verbose linkBins chai@1.9.1
+27 verbose linkMans chai@1.9.1
+28 verbose rebuildBundles chai@1.9.1
+29 verbose rebuildBundles [ 'assertion-error', 'deep-eql' ]
+30 info install chai@1.9.1
+31 info postinstall chai@1.9.1
+32 verbose rebuild bundle /Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite/node_modules/jquery
+33 info build /Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite/node_modules/jquery
+34 info preinstall jquery@2.1.1
+35 verbose linkStuff [ false,
+35 verbose linkStuff   false,
+35 verbose linkStuff   false,
+35 verbose linkStuff   '/Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite/node_modules' ]
+36 info linkStuff jquery@2.1.1
+37 verbose linkBins jquery@2.1.1
+38 verbose linkMans jquery@2.1.1
+39 verbose rebuildBundles jquery@2.1.1
+40 info install jquery@2.1.1
+41 info postinstall jquery@2.1.1
+42 verbose rebuild bundle /Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite/node_modules/jsdom
+43 info build /Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite/node_modules/jsdom
+44 info preinstall jsdom@0.11.0
+45 verbose linkStuff [ false,
+45 verbose linkStuff   false,
+45 verbose linkStuff   false,
+45 verbose linkStuff   '/Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite/node_modules' ]
+46 info linkStuff jsdom@0.11.0
+47 verbose linkBins jsdom@0.11.0
+48 verbose linkMans jsdom@0.11.0
+49 verbose rebuildBundles jsdom@0.11.0
+50 verbose rebuildBundles [ 'contextify',
+50 verbose rebuildBundles   'cssom',
+50 verbose rebuildBundles   'cssstyle',
+50 verbose rebuildBundles   'htmlparser2',
+50 verbose rebuildBundles   'nwmatcher',
+50 verbose rebuildBundles   'request',
+50 verbose rebuildBundles   'xmlhttprequest' ]
+51 info install jsdom@0.11.0
+52 info postinstall jsdom@0.11.0
+53 verbose rebuild bundle /Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite/node_modules/mocha
+54 info build /Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite/node_modules/mocha
+55 info preinstall mocha@1.20.1
+56 verbose linkStuff [ false,
+56 verbose linkStuff   false,
+56 verbose linkStuff   false,
+56 verbose linkStuff   '/Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite/node_modules' ]
+57 info linkStuff mocha@1.20.1
+58 verbose linkBins mocha@1.20.1
+59 verbose link bins [ { mocha: './bin/mocha', _mocha: './bin/_mocha' },
+59 verbose link bins   '/Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite/node_modules/.bin',
+59 verbose link bins   false ]
+60 verbose linkMans mocha@1.20.1
+61 verbose rebuildBundles mocha@1.20.1
+62 verbose rebuildBundles [ '.bin',
+62 verbose rebuildBundles   'commander',
+62 verbose rebuildBundles   'debug',
+62 verbose rebuildBundles   'diff',
+62 verbose rebuildBundles   'glob',
+62 verbose rebuildBundles   'growl',
+62 verbose rebuildBundles   'jade',
+62 verbose rebuildBundles   'mkdirp' ]
+63 error Error: EACCES, unlink '/Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite/node_modules/.bin/mocha'
+63 error  { [Error: EACCES, unlink '/Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite/node_modules/.bin/mocha']
+63 error   errno: 3,
+63 error   code: 'EACCES',
+63 error   path: '/Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite/node_modules/.bin/mocha' }
+64 error Please try running this command again as root/Administrator.
+65 error System Darwin 13.2.0
+66 error command "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+67 error cwd /Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite
+68 error node -v v0.10.29
+69 error npm -v 1.4.14
+70 error path /Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite/node_modules/.bin/mocha
+71 error code EACCES
+72 error errno 3
+73 error stack Error: EACCES, unlink '/Users/gianlucaguarini/Sites/www/jQuery.BlackAndWhite/node_modules/.bin/mocha'
+74 verbose exit [ 3, true ]
