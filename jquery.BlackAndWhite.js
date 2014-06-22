@@ -119,8 +119,16 @@
 				if (typeof options.onImageReady === 'function')
 					options.onImageReady(img);
 			};
+			var _initWebworker = function(imageslength) {
+				// start the webworker when all the images are ready
+				if (BnWWorker && supportsCanvas && !cssfilters && !imageslength) {
+					// web worker implementation
+					_webWorkerLoop();
+				}
+			};
 			// Loop all the images converting them by the webworker (this process is unobstrusive and it does not block the page loading)
 			var _webWorkerLoop = function() {
+
 				if (!imagesArray.length) {
 					// terminate the worker
 					// the standard way - http://www.w3.org/TR/workers/#dedicated-workers-and-the-worker-interface
@@ -131,6 +139,7 @@
 						BnWWorker.close();
 					return;
 				}
+
 
 				BnWWorker.postMessage({
 					imgData: imagesArray[0].imageData,
@@ -162,13 +171,11 @@
 
 				// web worker superfast implementation
 				if (BnWWorker) {
-
 					imagesArray.push({
 						imageData: imageData,
 						ctx: ctx,
 						img: img
 					});
-
 				} else {
 
 					// no webworker slow implementation
@@ -230,7 +237,9 @@
 				}
 			};
 			this.init = function(options) {
-
+				var imageslength = $container.find('img').filter(function() {
+					return !$(this).data('_b&w');
+				}).length;
 				// convert all the images
 				$container.each(function(index, tmpImageWrapper) {
 					var $imageWrapper = $(tmpImageWrapper),
@@ -238,20 +247,25 @@
 					if ($img.data('_b&w')) return;
 					if (!_isImageLoaded($img[0])) {
 						$img.on('load', function() {
-							if ($img.data('_b&w_loaded') || !_isImageLoaded($img[0])) return;
+							if ($img.data('_b&w_loaded') || !$img[0].complete) {
+								setTimeout(function() {
+									$img.load();
+								}, 20);
+								return;
+							}
 							_injectTags($img, $imageWrapper);
 							$img.data('_b&w_loaded', true);
+							imageslength--;
+							_initWebworker(imageslength);
 						}).load();
 					} else {
+						imageslength--;
 						_injectTags($img, $imageWrapper);
 					}
 					$img.data('_b&w', true);
 				});
-				// start the webworker
-				if (BnWWorker && supportsCanvas && !cssfilters) {
-					// web worker implementation
-					_webWorkerLoop();
-				}
+
+				_initWebworker(imageslength);
 				// binding the hover effect
 				if (hoverEffect) {
 					$container.on('mouseleave', _onMouseLeave);
