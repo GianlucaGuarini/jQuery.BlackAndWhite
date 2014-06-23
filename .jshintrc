@@ -8,5 +8,5 @@
   "sub": true,      // true: Tolerate using `[]` notation when it can still be expressed in dot notation
   "boss": true,     // true: Tolerate assignments where comparisons would be expected
   "eqnull": true,   // true: Tolerate use of `== null`
-  "indent":4
+  "indent":2
 }
