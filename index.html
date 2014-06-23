@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>jQuery.BlackAndWhite - Gianluca Guarini</title>
+        <meta name="Description" content="This jQuery plug-in can easly convert every colored image (in an html page) into a B&amp;W greyscale image." />
+        <meta name="Keywords"  content="JavaScript,HTML5,jQuery.BlackAndWhite.js,jQuery plugin" />
+        <meta name="viewport" content="width=device-width">
+        <!--[if lt IE 9]>
+        <script src="https://raw.github.com/aFarkas/html5shiv/4525162dd10e6fff7b83d06b28b562586e9fb058/src/html5shiv.js"></script>
+        <![endif]-->
+
+        <script src="http://yandex.st/highlightjs/6.1/highlight.min.js"></script>
+        <link rel="stylesheet" href="http://yandex.st/highlightjs/6.1/styles/dark.css">
+        <script src="src/jquery.min.js"></script>
+        <script src="src/jquery.BlackAndWhite.js"></script>
+        <meta property="og:title" content="jQuery.BlackAndWhite"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="http://gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/"/>
+        <meta property="og:image" content="http://gianlucaguarini.com/canvas-experiments/jQuery.BlackAndWhite/css/img/jQuery.blackAndWhite-logo.png"/>
+        <meta property="og:description"
+              content="This jQuery plug-in can easly convert every colored image (in an html page) into a B&amp;W greyscale image."/>
+
+        <link href='http://fonts.googleapis.com/css?family=Quicksand:400,300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/style.css">
+        <style>
+        .wrapper li {
+            background: url(css/loader.gif) center center no-repeat;
+        }
+        .wrapper li a {
+            opacity:0;
+            filter:alpha(opacity=0);
+        }
+        </style>
+        <script>
+            hljs.tabReplace = '    ';
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script>
+        $(function(){
+            $('.bwWrapper').BlackAndWhite({
+                hoverEffect:true,
+                webworkerPath: 'src/',
+                onImageReady:function(img){
+                    $(img).parent().animate({
+                        opacity:1
+                    });
+                }
+            });
+        });
+
+        </script>
+    </head>
+    <body>
+   <!--[if lt IE 7]>
+    <p class="chromeframe">
+        You are using an outdated browser.
+        <a href="http://browsehappy.com/">Upgrade your browser today</a>
+        or
+        <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a>
+        to better experience this site.
+    </p>
+    <![endif]-->
+    <div class="container">
+        <a href="https://github.com/GianlucaGuarini/jQuery.BlackAndWhite"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+        <h1 class="title">
+            <img src="css/img/jQuery.blackAndWhite-logo.png" />
+            jQuery.BlackAndWhite
+        </h1>
+        <h1>Description</h1>
+        <p>This plug-in can easily convert any colored image into a B&amp;W greyscale image. It uses the the HTML5 canvas tag and a fallback for the old browsers</p>
+        <h1>Usage</h1>
+    <p>
+        1 Include the plug into the page:
+    </p>
+<pre><code>
+&lt;script src="js/jQuery.BlackAndWhite.js"&gt;&lt;/script&gt;
+
+</code></pre>
+    <p>
+        2 Set the image wrappers using the css:
+    </p>
+<pre><code class="css">
+.bwWrapper {
+    position:relative;
+    display:block;
+}
+
+</code></pre>
+
+    <p>
+        3 Initialize the plug:
+    </p>
+    <pre><code class="javascript">
+
+    $('.bwWrapper').BlackAndWhite({
+        hoverEffect : true, // default true
+        // set the path to BnWWorker.js for a superfast implementation
+        webworkerPath : false,
+        // to invert the hover effect
+        invertHoverEffect: false,
+        // this option works only on the modern browsers ( on IE lower than 9 it remains always 1)
+        intensity:1,
+        speed: { //this property could also be just speed: value for both fadeIn and fadeOut
+            fadeIn: 200, // 200ms for fadeIn animations
+            fadeOut: 800 // 800ms for fadeOut animations
+        },
+        onImageReady:function(img) {
+            // this callback gets executed anytime an image is converted
+        }
+    });
+
+
+</code></pre>
+    <h2>Demo</h2>
+
+    <ul class="wrapper">
+        <li>
+            <a href="#" class="bwWrapper">
+                <img  src="files/image1.jpg" width="100%"  />
+            </a>
+        </li>
+        <li>
+            <a href="#" class="bwWrapper">
+                <img  src="files/image2.jpg" width="100%"  />
+            </a>
+        </li>
+        <li>
+            <a href="#" class="bwWrapper">
+                <img  src="files/image3.jpg" width="100%"  />
+            </a>
+        </li>
+        <li>
+            <a href="#" class="bwWrapper">
+                <img  src="files/image4.jpg" width="100%"  />
+            </a>
+        </li>
+        <li>
+            <a href="#" class="bwWrapper">
+                <img  src="files/image5.jpg" width="100%"  />
+            </a>
+        </li>
+        <li>
+            <a href="#" class="bwWrapper">
+                <img  src="files/image6.jpg" width="100%"  />
+            </a>
+        </li>
+        <li>
+            <a href="#" class="bwWrapper">
+                <img  src="files/image7.jpg" width="100%"  />
+            </a>
+        </li>
+        <li>
+            <a href="#" class="bwWrapper">
+                <img  src="files/image8.jpg" width="100%"  />
+            </a>
+        </li>
+    </ul>
+    <div class="clearfix"></div>
+    <h1>Other examples</h1>
+    <ul>
+        <li><a href="responsive.html">Responsive Demo</a></li>
+        <li><a href="invertHoverEffect.html">Hover effect inverted</a></li>
+        <li><a href="ajax-demo.html">Ajax demo</a></li>
+    </ul>
+    <h1>Download</h1>
+    <ul>
+        <li><a href="https://github.com/GianlucaGuarini/jQuery.BlackAndWhite">jQuery.BlackAndWhite</a></li>
+    </ul>
+        <aside class="addthis_toolbox addthis_default_style">
+            <h2 class="visuallyhidden">Share links</h2>
+            <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+
+            <a class="addthis_button_tweet" tw:via="gianlucaguarini"></a>
+            <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+            <a class="addthis_button_pinterest_pinit"></a>
+            <a class="addthis_counter addthis_pill_style"></a>
+        </aside>
+        <small>
+            &copy;
+            <a href="http://www.gianlucaguarini.com" target="_blank">Gianluca Guarini 2013</a> - All Images Right Reserved
+        </small>
+    </div>
+    <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=xa-507887fc43c4ab03"></script>
+
+    <script type="text/javascript">
+    var addthis_config = {
+           data_track_clickback: false
+        };
+         var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-8059670-3']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+    </script>
+</body>
+</html>

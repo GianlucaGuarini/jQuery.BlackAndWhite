@@ -1,0 +1,75 @@
+body {
+  background-color: white;
+  background-size: cover;
+  color: #666666;
+}
+.container {
+  margin: 0 auto;
+  width: 80%;
+}
+code,
+pre code {
+  background: rgba(0, 0, 0, 0.58);
+  padding: 0 0.42em;
+}
+pre .string,
+pre .title,
+pre .haskell .type,
+pre .ini .title,
+pre .tag .value,
+pre .css .rules .value,
+pre .preprocessor,
+pre .ruby .symbol,
+pre .ruby .symbol .string,
+pre .ruby .class .parent,
+pre .built_in,
+pre .sql .aggregate,
+pre .django .template_tag,
+pre .django .variable,
+pre .smalltalk .class,
+pre .javadoc,
+pre .ruby .string,
+pre .django .filter .argument,
+pre .smalltalk .localvars,
+pre .smalltalk .array,
+pre .attr_selector,
+pre .pseudo,
+pre .addition,
+pre .stream,
+pre .envvar,
+pre .apache .tag,
+pre .apache .cbracket,
+pre .tex .command,
+pre .input_number {
+  color: #ffb500;
+}
+pre .comment,
+pre .java .annotation,
+pre .python .decorator,
+pre .template_comment,
+pre .pi,
+pre .doctype,
+pre .deletion,
+pre .shebang,
+pre .apache .sqbracket,
+pre .tex .formula {
+  color: #888888;
+}
+.bwWrapper {
+  position: relative;
+  display: block;
+}
+.wrapper {
+  list-style: none;
+  width: 100%;
+  float: left;
+  padding: 0;
+}
+.wrapper li {
+  float: left;
+  width: 25%;
+}
+
+a {
+  color: black;
+}
