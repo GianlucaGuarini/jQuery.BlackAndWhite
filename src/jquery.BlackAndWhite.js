@@ -44,7 +44,6 @@
         options = $.extend({
           hoverEffect: true,
           webworkerPath: false,
-          responsive: true,
           invertHoverEffect: false,
           speed: 500,
           onImageReady: null,
@@ -52,11 +51,9 @@
         }, customOptions),
 
         // options shorthand
-
         hoverEffect = options.hoverEffect,
         webworkerPath = options.webworkerPath,
         invertHoverEffect = options.invertHoverEffect,
-        responsive = options.responsive,
         intensity = (typeof options.intensity === 'number' && options.intensity < 1 && options.intensity > 0) ? options.intensity : 1,
         fadeSpeedIn = $.isPlainObject(options.speed) ? options.speed.fadeIn : options.speed,
         fadeSpeedOut = $.isPlainObject(options.speed) ? options.speed.fadeOut : options.speed,
@@ -67,8 +64,11 @@
          * Private vars
          *
          */
+
         _tmpID = '_' + new Date().getTime(),
         _isIE7 = (document.all && !window.opera && window.XMLHttpRequest) ? true : false,
+        _browserPrefixes = ' -webkit- -moz- -o- -ms- '.split(' '),
+        _cssPrefixString = {},
 
         /**
          *
@@ -76,10 +76,10 @@
          *
          */
 
-        _browserPrefixes = ' -webkit- -moz- -o- -ms- '.split(' '),
-        _cssPrefixString = {},
         _cssPrefix = function(property) {
-          if (_cssPrefixString[property] || _cssPrefixString[property] === '') return _cssPrefixString[property] + property;
+          if (_cssPrefixString[property] || _cssPrefixString[property] === '') {
+              return _cssPrefixString[property] + property;
+            }
           var e = document.createElement('div'),
             prefixes = ['', 'Moz', 'Webkit', 'O', 'ms', 'Khtml']; // Various supports...
           for (var i in prefixes) {
@@ -91,61 +91,95 @@
           return property.toLowerCase();
         },
         // https://github.com/Modernizr/Modernizr/blob/master/feature-detects/css-filters.js
-        _cssfilters = function() {
+        _cssfilters = (function() {
           var el = document.createElement('div');
           el.style.cssText = _browserPrefixes.join('filter' + ':blur(2px); ');
           return !!el.style.length && ((document.documentMode === undefined || document.documentMode > 9));
-        }(),
+        }()),
         _supportsCanvas = !!document.createElement('canvas').getContext,
         /* Check if Web Workers are supported */
-        _supportWebworker = function() {
+        _supportWebworker = (function() {
           return (typeof(Worker) !== 'undefined') ? true : false;
-        }(),
+        }()),
         _cssFilter = _cssPrefix('Filter'),
         _imagesArray = [],
         _webWorker = _supportWebworker && webworkerPath ? new Worker(webworkerPath + 'BnWWorker.js') : false,
+
         /**
          *
          * Private methods
          *
          */
+
+        /**
+         * Mouse leave event callback delegated to the the images container
+         * @param  { Object } e jquery event object
+         */
         _onMouseLeave = function(e) {
-          $(e.currentTarget).find('.BWfade').stop(true, true)[!invertHoverEffect ? 'fadeIn' : 'fadeOut'](fadeSpeedOut);
+          $(e.currentTarget)
+            .find('.BWfade')
+            .stop(true, true)
+            .animate({
+              opacity: invertHoverEffect ? 0 : 1
+            },fadeSpeedOut);
         },
+        /**
+         * mouseenter event callback delegated to the the images container ($el)
+         * @param  { Object } e jquery event object
+         */
         _onMouseEnter = function(e) {
-          $(e.currentTarget).find('.BWfade').stop(true, true)[invertHoverEffect ? 'fadeIn' : 'fadeOut'](fadeSpeedIn);
+          $(e.currentTarget)
+            .find('.BWfade')
+            .stop(true, true)
+            .animate({
+              opacity: invertHoverEffect ? 1 : 0
+            },fadeSpeedOut);
         },
+        /**
+         * Callback triggered anytime an image gets loaded and converted
+         * @param  { Object } img: DOM image object
+         */
         _onImageReady = function(img) {
-          if (typeof options.onImageReady === 'function')
+          if (typeof options.onImageReady === 'function') {
             options.onImageReady(img);
+          }
         },
-        _initWebworker = function(imageslength) {
+        /**
+         * Initialize the webworker loop
+         * @param  { Int } imagesToLoadlength: the amount of images passed to the plugin but not loaded yet
+         */
+        _initWebworker = function(imagesToLoadlength) {
           // start the webworker when all the images are ready
-          if (_webWorker && _supportsCanvas && !_cssfilters && !imageslength) {
+          if (_webWorker && _supportsCanvas && !_cssfilters && !imagesToLoadlength) {
             // web worker implementation
             _webWorkerLoop();
           }
         },
-        // Loop all the images converting them by using the webworker (this process is unobstrusive and it does not block the page loading)
+        /**
+         * Loop all the images converting them by using the a webworker script (this process is unobstrusive and it does not block the page loading)
+         */
         _webWorkerLoop = function() {
 
           if (!_imagesArray.length) {
             // terminate the worker
             // the standard way - http://www.w3.org/TR/workers/#dedicated-workers-and-the-worker-interface
-            if (_webWorker.terminate)
+            if (_webWorker.terminate) {
               _webWorker.terminate();
+            }
             // IE 10 specific - http://msdn.microsoft.com/en-us/library/ie/hh673568(v=vs.85).aspx
-            if (_webWorker.close)
+            if (_webWorker.close) {
               _webWorker.close();
+            }
             return;
           }
 
-
+          // dispatch the image data to the webworker
           _webWorker.postMessage({
             imgData: _imagesArray[0].imageData,
             intensity: intensity
           });
 
+          // anytime a new image gets converted we continue the loop
           _webWorker.onmessage = function(event) {
             _imagesArray[0].ctx.putImageData(event.data, 0, 0);
             _onImageReady(_imagesArray[0].img);
@@ -153,9 +187,20 @@
             _webWorkerLoop();
           };
         },
+        /**
+         * Helper function to check whether an image has been completely loaded
+         * @param  { Object } img: DOM image object
+         */
         _isImageLoaded = function(img) {
           return img.complete || (typeof img.naturalWidth !== 'undefined' && img.naturalWidth);
         },
+        /**
+         * Use the HTML5 canvas to generate a B&W image
+         * @param  { Object } img: DOM image object
+         * @param  { Object } canvas: canvas element where we are going to draw
+         * @param  { Int } width: image width
+         * @param  { Int } height: image height
+         */
         _generateCanvasImage = function(img, canvas, width, height) {
           var ctx = canvas.getContext('2d'),
             currImg = img,
@@ -190,15 +235,20 @@
             _onImageReady(img);
           }
         },
+        /**
+         * Print the html element needed to show the B&W image
+         * @param  { Array } $img: jQuery array containing the image
+         * @param  { Array } $imageWrapper: jQuery array containing the image parent element
+         */
         _injectTags = function($img, $imageWrapper) {
 
           var img = $img[0],
             src = img.src,
-            width = $img.width(),
-            height = $img.height(),
             position = $img.position(),
             css = {
               position: 'absolute',
+              width: $img.attr('width'),
+              height: $img.attr('height'),
               '-webkit-transform': 'translate3d(0,0,0)', // fix for webkit browsers
               top: position.top,
               left: position.left,
@@ -209,93 +259,78 @@
           img.crossOrigin = 'anonymous';
 
           if (_supportsCanvas && !_cssfilters) {
-
-            var realWidth = img.width,
-              realHeight = img.height;
-
-            //adding the canvas
-            $overlay = $('<canvas class="BWfade" width="' + realWidth + '" height="' + realHeight + '"></canvas>');
-            //setting the canvas position on the Pics
-            $overlay.css(css);
-            $overlay.prependTo($imageWrapper);
-
-            _generateCanvasImage(img, $overlay.get(0), realWidth, realHeight);
+            // add the canvas
+            $overlay = $('<canvas width="' + img.width + '" height="' + img.height + '" class="BWfade"></canvas>');
+            _generateCanvasImage(img, $overlay.get(0), img.width, img.height);
 
           } else {
-
             css[_cssFilter] = 'grayscale(' + intensity * 100 + '%)';
-            //adding the canvas
-            $overlay = $('<img src=' + src + ' width="' + width + '" height="' + height + '" class="BWFilter BWfade" /> ');
-            $overlay.css($.extend(css, {
-              'filter': 'progid:DXImageTransform.Microsoft.BasicImage(grayscale=1)'
-            }));
-            $overlay.prependTo($imageWrapper);
-
+            // clone the original image using the css filters
+            $overlay = $('<img src="' + src + '" class="BWFilter BWfade" /> ');
             _onImageReady(img);
+          }
+
+          $overlay
+            .css($.extend(css, {
+              'filter': 'progid:DXImageTransform.Microsoft.BasicImage(grayscale=1)'
+            }))
+            .prependTo($imageWrapper);
+        },
+        /**
+         * Init the plugin stuff
+         */
+        _init = function() {
+          var imagesToLoadlength = $el.find('img').filter(function() {
+            return !$(this).data('_b&w');
+          }).length;
+          // convert all the images
+          $el.each(function(index, tmpImageWrapper) {
+            var $imageWrapper = $(tmpImageWrapper),
+              $img = $imageWrapper.find('img');
+            if ($img.data('_b&w')) return;
+            if (!_isImageLoaded($img[0])) {
+              $img.on('load', function() {
+                if ($img.data('_b&w_loaded') || !$img[0].complete) {
+                  setTimeout(function() {
+                    $img.load();
+                  }, 20);
+                  return;
+                }
+                _injectTags($img, $imageWrapper);
+                $img.data('_b&w_loaded', true);
+                imagesToLoadlength--;
+                _initWebworker(imagesToLoadlength);
+              }).load();
+            } else {
+              imagesToLoadlength--;
+              _injectTags($img, $imageWrapper);
+            }
+            $img.data('_b&w', true);
+          });
+
+          _initWebworker(imagesToLoadlength);
+          // binding the hover effect
+          if (hoverEffect) {
+            $el.on('mouseleave.' + _tmpID, _onMouseLeave);
+            $el.on('mouseenter.' + _tmpID, _onMouseEnter);
           }
         };
 
-      this.init = function(options) {
-        var imageslength = $el.find('img').filter(function() {
-          return !$(this).data('_b&w');
-        }).length;
-        // convert all the images
-        $el.each(function(index, tmpImageWrapper) {
-          var $imageWrapper = $(tmpImageWrapper),
-            $img = $imageWrapper.find('img');
-          if ($img.data('_b&w')) return;
-          if (!_isImageLoaded($img[0])) {
-            $img.on('load', function() {
-              if ($img.data('_b&w_loaded') || !$img[0].complete) {
-                setTimeout(function() {
-                  $img.load();
-                }, 20);
-                return;
-              }
-              _injectTags($img, $imageWrapper);
-              $img.data('_b&w_loaded', true);
-              imageslength--;
-              _initWebworker(imageslength);
-            }).load();
-          } else {
-            imageslength--;
-            _injectTags($img, $imageWrapper);
-          }
-          $img.data('_b&w', true);
-        });
+      /**
+       *
+       * Public Api
+       *
+       */
 
-        _initWebworker(imageslength);
-        // binding the hover effect
-        if (hoverEffect) {
-          $el.on('mouseleave.' + _tmpID, _onMouseLeave);
-          $el.on('mouseenter.' + _tmpID, _onMouseEnter);
-        }
-        // make it responsive
-        if (responsive) {
-          $window.on('resize.' + _tmpID + ' orientationchange.' + _tmpID, this.resizeImages);
-        }
-      };
-
-      this.resizeImages = function() {
-        $el.each(function(index, currImageWrapper) {
-          var img = $(currImageWrapper).find('img:not(.BWFilter)'),
-            currWidth = _isIE7 ? $(img).prop('width') : $(img).width(),
-            currHeight = _isIE7 ? $(img).prop('height') : $(img).height();
-          $(this).find('.BWFilter, canvas').css({
-            width: currWidth,
-            height: currHeight
-          });
-        });
-      };
-
-      this.destroy = function() {
-        $window.off('.' + _tmpID, this.resizeImages);
+      var destroy = function() {
         $el.off('.' + _tmpID);
       };
 
-      return this.init(options);
+      _init();
 
+      return {
+        destroy: destroy
+      };
     }
-
   });
 }(jQuery));
