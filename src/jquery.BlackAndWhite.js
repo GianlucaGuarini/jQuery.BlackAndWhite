@@ -331,6 +331,10 @@
 					});
 
 					_initWebworker(imagesToLoadlength);
+
+					if ($el.data('_b&w')) {
+						return;
+					}
 					// binding the hover effect
 					if (hoverEffect) {
 						$el.on('mouseleave.' + _tmpID, _onMouseLeave);
@@ -339,6 +343,7 @@
 					if (_supportsCanvas && !_cssfilters) {
 						$window.on('resize.' + _tmpID + ' orientationchange.' + _tmpID, _resizeCanvases);
 					}
+					$el.data('_b&w', true);
 				};
 
 			/**
@@ -350,6 +355,7 @@
 			var destroy = function () {
 				$el.off('.' + _tmpID);
 				$window.off('.' + _tmpID);
+				$el.removeData('_b&w');
 			};
 
 			_init();
