@@ -244,15 +244,10 @@
 
           var img = $img[0],
             src = img.src,
-            position = $img.position(),
             css = {
               position: 'absolute',
-              width: $img.attr('width'),
-              height: $img.attr('height'),
               '-webkit-transform': 'translate3d(0,0,0)', // fix for webkit browsers
-              top: position.top,
-              left: position.left,
-              display: invertHoverEffect ? 'none' : 'block'
+              opacity: invertHoverEffect ? 0 : 1
             },
             $overlay;
 
@@ -266,7 +261,7 @@
           } else {
             css[_cssFilter] = 'grayscale(' + intensity * 100 + '%)';
             // clone the original image using the css filters
-            $overlay = $('<img src="' + src + '" class="BWFilter BWfade" /> ');
+            $overlay = $img.clone().addClass('BWFilter BWfade');
             _onImageReady(img);
           }
 
@@ -275,6 +270,13 @@
               'filter': 'progid:DXImageTransform.Microsoft.BasicImage(grayscale=1)'
             }))
             .prependTo($imageWrapper);
+
+          // fix opacity on the old browsers
+          if (!$.support.opacity && invertHoverEffect) {
+            $overlay.animate({
+              opacity:0
+            },0);
+          }
         },
         /**
          * Init the plugin stuff
@@ -287,7 +289,11 @@
           $el.each(function(index, tmpImageWrapper) {
             var $imageWrapper = $(tmpImageWrapper),
               $img = $imageWrapper.find('img');
-            if ($img.data('_b&w')) return;
+            // this image got already converted
+            if ($img.data('_b&w')) {
+              return;
+            }
+            // if this image is not loaded yet
             if (!_isImageLoaded($img[0])) {
               $img.on('load', function() {
                 if ($img.data('_b&w_loaded') || !$img[0].complete) {

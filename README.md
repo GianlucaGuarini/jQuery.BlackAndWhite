@@ -25,8 +25,6 @@ $('.bwWrapper').BlackAndWhite({
     hoverEffect : true, // default true
     // set the path to BnWWorker.js for a superfast implementation
     webworkerPath : false,
-    // for the images with a fluid width and height
-    responsive:true,
     // to invert the hover effect
     invertHoverEffect: false,
     // this option works only on the modern browsers ( on IE lower than 9 it remains always 1)
