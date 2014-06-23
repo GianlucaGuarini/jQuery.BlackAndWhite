@@ -1,4 +1,4 @@
-this.onmessage = function(event) {
+this.onmessage = function (event) {
 	var imagedata = event.data.imgData,
 		intensity = event.data.intensity,
 		px = imagedata.data,

@@ -51,18 +51,26 @@
     <script src="../src/jquery.min.js"></script>
     <script src="../src/jQuery.BlackAndWhite.js"></script>
     <script>
-        var assertion = 0;
+        var assertion = 0,
+            testsLength = $('li').length;
         console.log('TAP version 13');
-        console.log('1..9');
+        console.log('1..'+ testsLength);
         // this shit does not work!
-        $('.bwWrapper').BlackAndWhite({
+        var bw = $('.bwWrapper').BlackAndWhite({
             onImageReady: function(img) {
                 $(img).parent().animate({
                     opacity: 1
                 });
                 console.log('ok ' + (++assertion));
+                if (assertion === testsLength) {
+                    setTimeout(function(){
+                        bw.destroy();
+                    },200);
+
+                }
             }
         });
+
     </script>
 </body>
 </html>
