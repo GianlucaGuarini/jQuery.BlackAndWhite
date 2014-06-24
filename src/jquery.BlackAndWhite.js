@@ -244,7 +244,10 @@
 
           var img = $img[0],
             src = img.src,
+            offset = $img.position(),
             css = {
+              top: offset.top,
+              left: offset.left,
               position: 'absolute',
               '-webkit-transform': 'translate3d(0,0,0)', // fix for webkit browsers
               opacity: invertHoverEffect ? 0 : 1
