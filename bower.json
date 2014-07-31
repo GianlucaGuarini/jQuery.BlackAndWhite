@@ -1,10 +1,6 @@
 {
   "name": "jquery.BlackAndWhite",
-<<<<<<< HEAD
-  "version": "0.3.2",
-=======
   "version": "0.3.4",
->>>>>>> master
   "main": "jquery.BlackAndWhite.js",
   "ignore": [
     "**/.*",
