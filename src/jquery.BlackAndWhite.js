@@ -128,7 +128,6 @@
          * @param  { Object } e jquery event object
          */
         _onMouseEnter = function (e) {
-          console.log(e);
           $(e.currentTarget)
             .find('.BWfade')
             .stop(true, true)
