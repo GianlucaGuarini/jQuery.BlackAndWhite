@@ -128,6 +128,7 @@
          * @param  { Object } e jquery event object
          */
         _onMouseEnter = function (e) {
+          console.log(e);
           $(e.currentTarget)
             .find('.BWfade')
             .stop(true, true)
@@ -315,14 +316,13 @@
             // if this image is not loaded yet
             if (!_isImageLoaded($img[0])) {
               $img.on('load', function () {
-                if ($img.data('_b&w_loaded') || !$img[0].complete) {
+                if (!_isImageLoaded($img[0])) {
                   setTimeout(function () {
                     $img.load();
                   }, 20);
                   return;
                 }
                 _injectTags($img, $imageWrapper);
-                $img.data('_b&w_loaded', true);
                 imagesToLoadlength--;
                 _initWebworker(imagesToLoadlength);
               }).load();
