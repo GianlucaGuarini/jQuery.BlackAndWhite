@@ -1,6 +1,6 @@
 /**
  *
- * Version: 0.3.3
+ * Version: 0.3.4
  * Author:  Gianluca Guarini
  * Contact: gianluca.guarini@gmail.com
  * Website: http://www.gianlucaguarini.com/
@@ -65,7 +65,7 @@
          *
          */
 
-        _tmpID = '_' + new Date().getTime(),
+        _evtNamespace = '.BlackAndWhite',
         _isIE7 = (document.all && !window.opera && window.XMLHttpRequest) ? true : false,
         _browserPrefixes = ' -webkit- -moz- -o- -ms- '.split(' '),
         _cssPrefixString = {},
@@ -128,6 +128,7 @@
          * @param  { Object } e jquery event object
          */
         _onMouseEnter = function (e) {
+          console.log(e);
           $(e.currentTarget)
             .find('.BWfade')
             .stop(true, true)
@@ -315,14 +316,13 @@
             // if this image is not loaded yet
             if (!_isImageLoaded($img[0])) {
               $img.on('load', function () {
-                if ($img.data('_b&w_loaded') || !$img[0].complete) {
+                if (!_isImageLoaded($img[0])) {
                   setTimeout(function () {
                     $img.load();
                   }, 20);
                   return;
                 }
                 _injectTags($img, $imageWrapper);
-                $img.data('_b&w_loaded', true);
                 imagesToLoadlength--;
                 _initWebworker(imagesToLoadlength);
               }).load();
@@ -335,18 +335,19 @@
 
           _initWebworker(imagesToLoadlength);
 
-          if ($el.data('_b&w')) {
-            return;
-          }
           // binding the hover effect
           if (hoverEffect) {
-            $el.on('mouseleave.' + _tmpID, _onMouseLeave);
-            $el.on('mouseenter.' + _tmpID, _onMouseEnter);
+            $el
+              .unbind(_evtNamespace)
+              .on('mouseleave' + _evtNamespace, _onMouseLeave)
+              .on('mouseenter' + _evtNamespace, _onMouseEnter);
           }
           if (_supportsCanvas && !_cssfilters) {
-            $window.on('resize.' + _tmpID + ' orientationchange.' + _tmpID, _resizeCanvases);
+            $window
+              .unbind(_evtNamespace)
+              .on('resize' + _evtNamespace + ' orientationchange' + _evtNamespace, _resizeCanvases);
           }
-          $el.data('_b&w', true);
+
         };
 
       /**
@@ -356,9 +357,8 @@
        */
 
       var destroy = function () {
-        $el.off('.' + _tmpID);
-        $window.off('.' + _tmpID);
-        $el.removeData('_b&w');
+        $el.off(_evtNamespace);
+        $window.off(_evtNamespace);
       };
 
       _init();
