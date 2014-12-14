@@ -32,10 +32,10 @@
   },
   "homepage": "https://github.com/GianlucaGuarini/jQuery.BlackAndWhite",
   "devDependencies": {
-    "grunt": "^0.4.3",
-    "grunt-cli": "^0.1.13",
-    "grunt-contrib-copy": "^0.5.0",
-    "grunt-contrib-jshint": "^0.8.0",
-    "grunt-contrib-uglify": "^0.4.0"
+    "grunt": "*",
+    "grunt-cli": "*",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-uglify": "*"
   }
 }
