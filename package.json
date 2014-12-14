@@ -33,7 +33,6 @@
   "homepage": "https://github.com/GianlucaGuarini/jQuery.BlackAndWhite",
   "devDependencies": {
     "grunt": "*",
-    "grunt-cli": "*",
     "grunt-contrib-copy": "*",
     "grunt-contrib-jshint": "*",
     "grunt-contrib-uglify": "*"
