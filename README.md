@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/GianlucaGuarini/jQuery.BlackAndWhite.svg?branch=master)](https://travis-ci.org/GianlucaGuarini/jQuery.BlackAndWhite) [![devDependency Status](https://david-dm.org/GianlucaGuarini/jQuery.BlackAndWhite/dev-status.svg)](https://david-dm.org/GianlucaGuarini/jQuery.BlackAndWhite#info=devDependencies) [![license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/cdnjs/cdnjs/blob/master/MIT-LICENSE)
+
 This plug-in can easily convert every colored image (in an html page) into a B&W greyscale image.
 Read the plugin API on here http://gianlucaguarini.github.io/jQuery.BlackAndWhite/.
 
