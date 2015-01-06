@@ -22,7 +22,7 @@ Read the plugin API on here http://gianlucaguarini.github.io/jQuery.BlackAndWhit
 
 3 Initialize the plug in:
 
-```javacript
+```javascript
 $('.bwWrapper').BlackAndWhite({
     hoverEffect : true, // default true
     // set the path to BnWWorker.js for a superfast implementation
