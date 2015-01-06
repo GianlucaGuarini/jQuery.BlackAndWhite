@@ -3,26 +3,26 @@
 This plug-in can easily convert every colored image (in an html page) into a B&W greyscale image.
 Read the plugin API on here http://gianlucaguarini.github.io/jQuery.BlackAndWhite/.
 
-#Usage
+# Usage
 
 1 Include the plug into the page:
 
-<pre lang="html">
+```html
 &lt;script src="js/jQuery.BlackAndWhite.js"&gt;&lt;/script&gt;
-</pre>
+```
 
 2 Set the image wrappers using the css:
 
-<pre lang="css">
+```css
 .bwWrapper {
     position:relative;
     display:block;
 }
-</pre>
+```
 
 3 Initialize the plug in:
 
-<pre lang="javascript">
+```javacript
 $('.bwWrapper').BlackAndWhite({
     hoverEffect : true, // default true
     // set the path to BnWWorker.js for a superfast implementation
@@ -39,16 +39,35 @@ $('.bwWrapper').BlackAndWhite({
     	// this callback gets executed anytime an image is converted
     }
 });
-</pre>
+```
 
 ## IMPORTANT
 
 the script works only for the images hosted on the same server in which the page is loaded!
 
+## Lightweight solution
+
+If you are looking for a lightweight solution, you can use the following css instead, __but it's not 100% crossbrowser__:
+
+```css
+
+img {
+    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+    transition: 0.3s ease-in;
+}
+
+img:hover {
+    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale");
+    -webkit-filter: grayscale(0%);
+}
+
+```
+
 
 ## Plugin Showcase
 
-*   [Circle Theme](http://kopatheme.com/demo/circle/html/portfolio-1col.html)
 *   [spartan-clean-responsive-business-template](http://themeforest.net/item/spartan-clean-responsive-business-template/full_screen_preview/3019206)
 *   [Teocomi.com](http://teocomi.com/photos/)
 *   [United Designers](http://www.unitedesigners.it/#!/124-tailored-branding)

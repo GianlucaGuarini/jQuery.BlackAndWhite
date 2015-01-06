@@ -1,6 +1,6 @@
 /**
  *
- * Version: 0.3.4
+ * Version: 0.3.5
  * Author:  Gianluca Guarini
  * Contact: gianluca.guarini@gmail.com
  * Website: http://www.gianlucaguarini.com/
@@ -225,9 +225,9 @@
             // no webworker slow implementation
             for (; i < length; i += 4) {
               var k = px[i] * 0.3 + px[i + 1] * 0.59 + px[i + 2] * 0.11;
-              px[i] = ~~ (k * intensity + px[i] * (1 - intensity));
-              px[i + 1] = ~~ (k * intensity + px[i + 1] * (1 - intensity));
-              px[i + 2] = ~~ (k * intensity + px[i + 2] * (1 - intensity));
+              px[i] = ~~(k * intensity + px[i] * (1 - intensity));
+              px[i + 1] = ~~(k * intensity + px[i + 1] * (1 - intensity));
+              px[i + 2] = ~~(k * intensity + px[i + 2] * (1 - intensity));
             }
 
             ctx.putImageData(imageData, 0, 0);
@@ -265,16 +265,22 @@
             _generateCanvasImage(img, $overlay.get(0), img.naturalWidth, img.naturalHeight);
 
           } else {
-            css[_cssFilter] = 'grayscale(' + intensity * 100 + '%)';
+
+            // it's a modern browser but it doesn't support the css filters
+            if (_supportsCanvas) {
+              css[_cssFilter] = 'grayscale(' + intensity * 100 + '%)';
+            } else {
+              // it's an old IE
+              css.filter = 'progid:DXImageTransform.Microsoft.BasicImage(grayscale=1)';
+            }
             // clone the original image using the css filters
             $overlay = $img.clone().addClass('BWFilter BWfade');
             _onImageReady(img);
+
           }
 
           $overlay
-            .css($.extend(css, {
-              'filter': 'progid:DXImageTransform.Microsoft.BasicImage(grayscale=1)'
-            }))
+            .css(css)
             .prependTo($imageWrapper);
 
           // fix opacity on the old browsers
