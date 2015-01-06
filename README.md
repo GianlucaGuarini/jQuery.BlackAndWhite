@@ -8,7 +8,7 @@ Read the plugin API on here http://gianlucaguarini.github.io/jQuery.BlackAndWhit
 1 Include the plug into the page:
 
 ```html
-&lt;script src="js/jQuery.BlackAndWhite.js"&gt;&lt;/script&gt;
+<script src="js/jQuery.BlackAndWhite.js"></script>
 ```
 
 2 Set the image wrappers using the css:
