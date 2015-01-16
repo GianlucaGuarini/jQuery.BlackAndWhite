@@ -1,6 +1,6 @@
 /**
  *
- * Version: 0.3.6
+ * Version: 0.3.7
  * Author:  Gianluca Guarini
  * Contact: gianluca.guarini@gmail.com
  * Website: http://www.gianlucaguarini.com/
@@ -133,7 +133,7 @@
             .stop(true, true)
             .animate({
               opacity: invertHoverEffect ? 1 : 0
-            }, fadeSpeedOut);
+            }, fadeSpeedIn);
         },
         /**
          * Callback triggered anytime an image gets loaded and converted
