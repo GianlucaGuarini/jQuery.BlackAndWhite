@@ -1,6 +1,6 @@
 /**
  *
- * Version: 0.3.7
+ * Version: 0.3.8
  * Author:  Gianluca Guarini
  * Contact: gianluca.guarini@gmail.com
  * Website: http://www.gianlucaguarini.com/
