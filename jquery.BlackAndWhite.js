@@ -47,7 +47,8 @@
           invertHoverEffect: false,
           speed: 500,
           onImageReady: null,
-          intensity: 1
+          intensity: 1,
+          crossOrigin: true
         }, customOptions),
 
         // options shorthand
@@ -254,7 +255,10 @@
             },
             $overlay;
 
-          img.crossOrigin = 'anonymous';
+          if (options.crossOrigin) {
+            img.crossOrigin = 'anonymous';
+          }
+
 
           if (_supportsCanvas && !_cssfilters) {
             // add the canvas

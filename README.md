@@ -31,6 +31,9 @@ $('.bwWrapper').BlackAndWhite({
     invertHoverEffect: false,
     // this option works only on the modern browsers ( on IE lower than 9 it remains always 1)
     intensity:1,
+    // this option enables/disables the attribute crossorigin=anonymous on image tags. Default true.
+    // please refer to https://github.com/GianlucaGuarini/jQuery.BlackAndWhite#important
+    crossOrigin: true,
     speed: { //this property could also be just speed: value for both fadeIn and fadeOut
         fadeIn: 200, // 200ms for fadeIn animations
         fadeOut: 800 // 800ms for fadeOut animations
